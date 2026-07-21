@@ -2,6 +2,7 @@
 import Container from "../common/Container.astro";
 import Section from "../common/Section.astro";
 import SectionHeading from "../common/SectionHeading.astro";
+import { siteConfig } from "../../config/site";
 ---
 
 <Section id="a-propos">
@@ -19,13 +20,10 @@ import SectionHeading from "../common/SectionHeading.astro";
           eyebrow="À propos"
           title="Une approche proche de vos opérations"
         />
-        <p class="name">Laveniel Séjour</p>
-        <p class="role">Entrepreneur et développeur de solutions numériques.</p>
-        <p class="statement">
-          Je conçois des outils numériques pour aider les entreprises à mieux
-          organiser leurs opérations, suivre leur activité et gagner en
-          contrôle.
-        </p>
+        <p class="name">{siteConfig.founder.name}</p>
+        <p class="role">{siteConfig.founder.role}</p>
+        <p class="statement">{siteConfig.founder.shortBio}</p>
+        <a class="about-link" href="/a-propos/">Découvrir notre approche</a>
       </div>
     </div>
   </Container>
@@ -64,6 +62,12 @@ import SectionHeading from "../common/SectionHeading.astro";
     margin: var(--space-lg) 0 0;
     color: var(--color-text-muted);
     font-size: 1.1rem;
+  }
+
+  .about-link {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    font-weight: 700;
   }
 
   @media (min-width: 48rem) {

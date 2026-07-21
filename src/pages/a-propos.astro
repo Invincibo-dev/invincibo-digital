@@ -1,0 +1,532 @@
+---
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+
+const founderInitials = siteConfig.founder.name
+  .split(/\s+/)
+  .map((part) => part[0])
+  .join("")
+  .toUpperCase();
+
+const lessons = [
+  [
+    "Les règles réelles d’abord",
+    "Un logiciel utile doit respecter le fonctionnement réel de l’activité.",
+  ],
+  [
+    "Des responsabilités explicites",
+    "Les permissions et les rôles comptent autant que les écrans.",
+  ],
+  [
+    "Une trace exploitable",
+    "La traçabilité devient essentielle lorsque les opérations sont sensibles.",
+  ],
+  [
+    "Une évolution cohérente",
+    "Un système doit pouvoir évoluer sans perdre la logique qui le rend compréhensible.",
+  ],
+] as const;
+
+const domains = [
+  "Gestion financière et opérationnelle",
+  "Gestion commerciale",
+  "Formation et évaluation",
+  "CRM et suivi client",
+] as const;
+
+const principles = [
+  "Compréhension avant développement",
+  "Périmètre clair",
+  "Communication directe",
+  "Validation progressive",
+  "Confidentialité",
+  "Documentation utile",
+  "Amélioration continue",
+] as const;
+
+const boundaries = [
+  "Aucune promesse de résultat automatique",
+  "Aucun délai universel appliqué à tous les projets",
+  "Aucune fonctionnalité illimitée",
+  "Aucune solution sur mesure recommandée sans analyse",
+  "Aucune publication de données client sans validation",
+] as const;
+---
+
+<BaseLayout
+  title="À propos"
+  description="Découvrez Laveniel Séjour, entrepreneur et développeur de solutions numériques, ainsi que l’approche d’Invincibo Digital pour concevoir des logiciels adaptés aux réalités des entreprises."
+  canonical={`${siteConfig.domain}/a-propos/`}
+>
+  <Section class="about-hero">
+    <Container>
+      <div class="hero-content">
+        <Badge variant="primary">À propos</Badge>
+        <h1>Construire des solutions utiles, pas seulement du code.</h1>
+        <p class="hero-lead">
+          Invincibo Digital est né d’une expérience concrète : comprendre les
+          opérations d’une activité, identifier ce qui ralentit son
+          fonctionnement et construire un système adapté.
+        </p>
+        <div class="hero-actions">
+          <ButtonLink href={whatsappUrl} external size="lg">
+            Discuter de mon projet<Icon slot="icon" name="external" />
+          </ButtonLink>
+          <ButtonLink href="/realisations/" variant="secondary" size="lg">
+            Voir nos réalisations<Icon slot="icon" name="arrow-right" />
+          </ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="founder-section" variant="surface">
+    <Container>
+      <div class="founder-grid">
+        <div>
+          <SectionHeading
+            eyebrow="Le fondateur"
+            title="Une expérience ancrée dans les opérations réelles."
+          />
+          <div
+            class="profile-card"
+            aria-label={`Profil de ${siteConfig.founder.name}`}
+          >
+            <span class="profile-initials" aria-hidden="true"
+              >{founderInitials}</span
+            >
+            <div class="profile-copy">
+              <p class="profile-name">{siteConfig.founder.name}</p>
+              <p class="profile-role">{siteConfig.founder.role}</p>
+              <p class="profile-note">Portrait officiel à venir</p>
+            </div>
+          </div>
+        </div>
+        <div class="prose founder-copy">
+          <p>
+            Je travaille à l’intersection du développement logiciel et des
+            besoins opérationnels des entreprises. Mon objectif n’est pas
+            seulement de créer une interface, mais de comprendre les règles, les
+            responsabilités et les difficultés qui structurent une activité.
+          </p>
+          <p>
+            Mon expérience entrepreneuriale, notamment avec Invincibo GSM, et la
+            construction de systèmes de gestion m’ont appris à partir des usages
+            réels. Cette approche donne une place centrale à la clarté, au suivi
+            et à la traçabilité.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Pourquoi cette activité"
+          title="Des besoins réels demandent souvent plus qu’un outil générique."
+        />
+        <div class="prose">
+          <p>
+            WhatsApp, Excel, les cahiers et les outils séparés peuvent être très
+            utiles pour démarrer et organiser une activité.
+          </p>
+          <p>
+            Lorsque l’entreprise grandit, certaines opérations deviennent
+            toutefois difficiles à suivre, à partager ou à contrôler. Invincibo
+            Digital existe pour concevoir des systèmes adaptés à ces réalités,
+            lorsque cette démarche est réellement pertinente.
+          </p>
+          <a href="/solutions/"
+            >Voir les problèmes que nos solutions peuvent traiter</a
+          >
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Enseignements"
+        title="Ce que la construction de projets nous a appris."
+        description="Ces principes sont appliqués selon la criticité et le périmètre du projet."
+      />
+      <ol class="lesson-list section-content">
+        {
+          lessons.map(([title, description], index) => (
+            <li>
+              <>
+                <span>0{index + 1}</span>
+                <div>
+                  <>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </>
+                </div>
+              </>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Expérience concrète"
+          title="Des domaines déjà abordés."
+          description="Ces familles résument des problèmes déjà rencontrés, sans exposer les données ni les technologies internes des projets."
+        />
+        <div>
+          <ul class="domain-list">
+            {domains.map((domain) => <li>{domain}</li>)}
+          </ul>
+          <a class="section-link" href="/realisations/"
+            >Explorer nos réalisations</a
+          >
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="working-grid">
+        <SectionHeading
+          eyebrow="Manière de travailler"
+          title="Une collaboration structurée autour des décisions utiles."
+          description="La méthode reste proportionnée au projet et à ses risques."
+        />
+        <ol class="principle-list">
+          {
+            principles.map((principle, index) => (
+              <li>
+                <>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{principle}</strong>
+                </>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <a class="section-link" href="/methode/"
+        >Découvrir notre méthode de travail</a
+      >
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="boundary-panel">
+        <SectionHeading
+          eyebrow="Engagement responsable"
+          title="La confiance commence aussi par des limites claires."
+          description="Un échange sérieux distingue ce qui peut être construit, ce qui doit être étudié et ce qui ne peut pas être promis à l’avance."
+        />
+        <ul class="boundary-list">
+          {
+            boundaries.map((boundary) => (
+              <li>
+                <>
+                  <Icon name="check" size={19} />
+                  <span>{boundary}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split communication">
+        <SectionHeading
+          eyebrow="Communication"
+          title="Échanger dans la langue la plus naturelle pour le projet."
+        />
+        <div class="prose">
+          <p>
+            La communication peut être menée en <strong>français</strong> ou en <strong
+              >créole haïtien</strong
+            >. Les outils, les canaux et le rythme des échanges dépendent du
+            contexte et des besoins du projet.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Premier échange"
+          title="Parlons de votre fonctionnement, pas seulement de votre idée d’application."
+          description="Présentez-nous votre activité, les opérations qui vous posent problème et ce que vous souhaitez mieux organiser."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg"
+          >Discuter sur WhatsApp<Icon slot="icon" name="external" /></ButtonLink
+        >
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.about-hero) {
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+  :global(.founder-section) {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .hero-content {
+    max-width: 58rem;
+  }
+  .editorial-split,
+  .working-grid,
+  .founder-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  h1 {
+    max-width: 18ch;
+    margin: var(--space-lg) 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+    line-height: 1.08;
+  }
+  :global(.section-heading h2) {
+    font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+  }
+  .hero-lead,
+  .prose,
+  .lesson-list p {
+    color: var(--color-text-muted);
+  }
+  .hero-lead {
+    max-width: 43rem;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+  .profile-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-elevated);
+  }
+  .profile-initials {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-soft);
+    color: var(--color-focus);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+  .profile-copy p {
+    margin: 0;
+  }
+  .profile-name {
+    font-weight: 800;
+  }
+  .profile-role {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+  .profile-note {
+    margin-top: var(--space-xs) !important;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+  .editorial-split,
+  .working-grid {
+    align-items: start;
+  }
+  .prose {
+    max-width: 43rem;
+    font-size: 1.05rem;
+  }
+  .prose p:first-child {
+    margin-top: 0;
+  }
+  .prose p:last-of-type {
+    margin-bottom: var(--space-lg);
+  }
+  .founder-copy {
+    padding-top: 0;
+  }
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+  .lesson-list,
+  .domain-list,
+  .principle-list,
+  .boundary-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lesson-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .lesson-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .lesson-list > li > span,
+  .principle-list span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .lesson-list h3,
+  .lesson-list p {
+    margin: 0;
+  }
+  .lesson-list p {
+    margin-top: var(--space-xs);
+  }
+  .domain-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--color-border);
+  }
+  .domain-list li {
+    min-height: 5rem;
+    padding: var(--space-md);
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 700;
+  }
+  .section-link {
+    display: inline-block;
+    margin-top: var(--space-xl);
+    font-weight: 700;
+  }
+  .principle-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .principle-list li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .boundary-panel {
+    display: grid;
+    gap: var(--space-2xl);
+    padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+  .boundary-list {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .boundary-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .boundary-list :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  @media (max-width: 30rem) {
+    :global(.about-hero) {
+      padding-block: 1.5rem 2rem;
+    }
+    :global(.founder-section) {
+      padding-block: 2rem;
+    }
+    .founder-grid {
+      gap: var(--space-xl);
+    }
+    h1 {
+      margin-block: var(--space-md);
+      font-size: 2rem;
+      line-height: 1.07;
+    }
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    .profile-card {
+      margin-top: var(--space-lg);
+      padding: var(--space-sm);
+    }
+    .profile-initials {
+      width: 3rem;
+      height: 3rem;
+    }
+    .domain-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 48rem) {
+    .lesson-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lesson-list li:nth-child(odd) {
+      border-right: 1px solid var(--color-border);
+      padding-right: var(--space-lg);
+    }
+    .lesson-list li:nth-child(even) {
+      padding-left: var(--space-lg);
+    }
+    .boundary-panel {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+  }
+  @media (min-width: 64rem) {
+    .editorial-split,
+    .working-grid,
+    .founder-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

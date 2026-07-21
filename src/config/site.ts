@@ -14,6 +14,12 @@ export const siteConfig = {
   whatsapp: "50936896407",
   email: null,
   socialLinks: {},
+  founder: {
+    name: "Laveniel Séjour",
+    role: "Entrepreneur et développeur de solutions numériques",
+    shortBio:
+      "Je construis des solutions numériques à partir de problèmes opérationnels réels.",
+  },
 } as const;
 
 export const mainNavigation = [
@@ -21,7 +27,7 @@ export const mainNavigation = [
   { label: "Solutions", href: "/solutions/" },
   { label: "Réalisations", href: "/realisations/" },
   { label: "Méthode", href: "/methode/" },
-  { label: "À propos", href: "/#a-propos" },
+  { label: "À propos", href: "/a-propos/" },
   { label: "Contact", href: "/#contact" },
 ] as const;
 
