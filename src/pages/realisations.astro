@@ -1,0 +1,452 @@
+---
+import { getCollection } from "astro:content";
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import ProjectCard from "../components/projects/ProjectCard.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPublicProjectTitle } from "../utils/projects";
+
+const projects = (
+  await getCollection(
+    "projects",
+    ({ data }) => data.published && data.visibility !== "private",
+  )
+).sort((a, b) => a.data.order - b.data.order);
+
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+
+const systemFamilies = [
+  [
+    "Gestion financière et opérationnelle",
+    "Caisse, épargne, rôles et contrôle des opérations.",
+  ],
+  ["Gestion commerciale", "Ventes, stock, réparations et relation client."],
+  ["Formation et évaluation", "Étudiants, modules, examens et progression."],
+  [
+    "CRM et suivi client",
+    "Prospects, tâches, accompagnements et continuité du suivi.",
+  ],
+] as const;
+
+const rigorPrinciples = [
+  "Règles métier explicites",
+  "Permissions et responsabilités",
+  "Historique et traçabilité",
+  "Validations adaptées",
+  "Tests selon les risques",
+  "Sauvegarde et déploiement selon le projet",
+  "Documentation utile",
+  "Maintenance et évolution",
+] as const;
+
+const publicationRequirements = [
+  "Autorisation de publication",
+  "Anonymisation des informations sensibles",
+  "Sélection de captures autorisées",
+  "Validation des données visibles",
+  "Rédaction factuelle du problème et de la solution",
+  "Résultats vérifiables, lorsqu’ils sont disponibles",
+] as const;
+---
+
+<BaseLayout
+  title="Réalisations logicielles"
+  description="Découvrez des systèmes de gestion, applications métier, plateformes de formation et outils de suivi conçus autour de besoins opérationnels réels."
+  canonical={`${siteConfig.domain}/realisations/`}
+>
+  <Section class="projects-hero">
+    <Container>
+      <div class="hero-grid">
+        <div>
+          <Badge variant="primary">Réalisations</Badge>
+          <h1>
+            Des systèmes construits autour de besoins opérationnels réels.
+          </h1>
+          <p class="hero-lead">
+            Chaque projet part d’un fonctionnement concret, de règles métier et
+            de difficultés à résoudre — pas d’un modèle générique imposé à
+            l’entreprise.
+          </p>
+          <div class="hero-actions">
+            <ButtonLink href={whatsappUrl} external size="lg">
+              Discuter de mon projet<Icon slot="icon" name="external" />
+            </ButtonLink>
+            <ButtonLink href="/solutions/" variant="secondary" size="lg">
+              Découvrir nos solutions<Icon slot="icon" name="arrow-right" />
+            </ButtonLink>
+          </div>
+        </div>
+        <div
+          class="systems-map"
+          aria-label="Aperçu conceptuel de quatre familles de systèmes"
+        >
+          <p>Aperçu conceptuel</p>
+          <div>
+            <span><Icon name="business" size={20} />Gestion</span>
+            <span><Icon name="code" size={20} />Formation</span>
+            <span><Icon name="automation" size={20} />Opérations</span>
+            <span><Icon name="check" size={20} />Suivi</span>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Transparence"
+          title="Ce que nous montrons — et ce que nous protégeons."
+        />
+        <div class="editorial-copy">
+          <p>
+            Les réalisations sont présentées de manière factuelle, à partir
+            d’éléments suffisamment validés pour être rendus publics.
+          </p>
+          <p>
+            Certaines identités restent anonymisées. Les données personnelles,
+            opérations sensibles, accès privés et informations financières
+            réelles ne sont jamais exposés.
+          </p>
+          <p>
+            Une étude de cas détaillée ne sera publiée qu’après autorisation et
+            validation de tous ses éléments.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="projets">
+    <Container>
+      <SectionHeading
+        eyebrow="Sélection publique"
+        title="Des solutions conçues pour des opérations distinctes."
+        description="Les intitulés publics protègent les organisations lorsque leur identification n’est pas encore autorisée. Aucun résultat chiffré ni donnée réelle n’est affiché."
+      />
+      <div class="projects-grid section-content">
+        {
+          projects.map((project) => {
+            const publicProjectTitle = getPublicProjectTitle(project.data);
+
+            return (
+              <ProjectCard
+                internalTitle={project.data.title}
+                publicTitle={project.data.publicTitle}
+                visibility={project.data.visibility}
+                category={project.data.category}
+                summary={project.data.summary}
+                challenge={project.data.challenge}
+                solution={project.data.solution}
+                capabilities={project.data.capabilities}
+                statusLabel={project.data.statusLabel}
+                confidentialityNote={project.data.confidentialityNote}
+                href={createWhatsAppUrl(
+                  `Bonjour ${siteConfig.name}, je souhaite discuter d’un projet similaire à votre ${publicProjectTitle.toLocaleLowerCase("fr")}.`,
+                )}
+              />
+            );
+          })
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Diversité des usages"
+        title="Quatre familles de systèmes déjà abordées."
+        description="Ces familles décrivent les contextes opérationnels couverts, sans présumer que deux entreprises ont besoin de la même solution."
+      />
+      <ol class="families-list section-content">
+        {
+          systemFamilies.map(([title, description], index) => (
+            <li>
+              <>
+                <span>0{index + 1}</span>
+                <div>
+                  <>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </>
+                </div>
+              </>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="rigor-grid">
+        <SectionHeading
+          eyebrow="Notre rigueur"
+          title="Un logiciel utile doit aussi être fiable."
+          description="Le niveau de rigueur dépend de la criticité des opérations. Ces principes sont évalués et appliqués selon le contexte de chaque projet."
+        />
+        <ul class="rigor-list">
+          {
+            rigorPrinciples.map((principle) => (
+              <li>
+                <>
+                  <Icon name="check" size={19} />
+                  <span>{principle}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="publication-grid">
+        <SectionHeading
+          eyebrow="Avant publication"
+          title="Une étude de cas demande une validation complète."
+          description="Une présentation détaillée doit informer sans compromettre la confidentialité de l’organisation ni celle de ses utilisateurs."
+        />
+        <Card>
+          <ul class="publication-list">
+            {
+              publicationRequirements.map((requirement) => (
+                <li>{requirement}</li>
+              ))
+            }
+          </ul>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Prochaine réalisation"
+          title="Votre projet peut devenir notre prochaine réalisation documentée."
+          description="Présentez-nous vos opérations, vos difficultés et les outils que vous utilisez aujourd’hui. Nous vous aiderons à cadrer une solution adaptée."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg">
+          Discuter sur WhatsApp<Icon slot="icon" name="external" />
+        </ButtonLink>
+        <a class="home-link" href="/">Retourner à l’accueil</a>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.projects-hero) {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .hero-grid,
+  .editorial-split,
+  .rigor-grid,
+  .publication-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  h1 {
+    max-width: 16ch;
+    margin: var(--space-lg) 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+    line-height: 1.08;
+  }
+  :global(.section-heading h2) {
+    font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+  }
+  .hero-lead,
+  .editorial-copy,
+  .families-list p,
+  .home-link {
+    color: var(--color-text-muted);
+  }
+  .hero-lead {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+  .systems-map {
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .systems-map > p {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .systems-map > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+  }
+  .systems-map span {
+    display: grid;
+    min-height: 6rem;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-soft);
+    font-weight: 700;
+  }
+  .systems-map :global(svg) {
+    color: var(--color-focus);
+  }
+  .editorial-split,
+  .rigor-grid,
+  .publication-grid {
+    align-items: start;
+  }
+  .editorial-copy p:first-child {
+    margin-top: 0;
+  }
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+  .projects-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .families-list {
+    margin-bottom: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border);
+    list-style: none;
+  }
+  .families-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .families-list > li > span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .families-list h3 {
+    margin-bottom: var(--space-xs);
+    font-size: 1.1rem;
+  }
+  .families-list p {
+    margin: 0;
+  }
+  .rigor-list,
+  .publication-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rigor-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+  .rigor-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+  .rigor-list :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+  .publication-list {
+    counter-reset: requirement;
+  }
+  .publication-list li {
+    counter-increment: requirement;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: var(--space-sm);
+    padding-block: var(--space-sm);
+    color: var(--color-text-muted);
+  }
+  .publication-list li::before {
+    content: counter(requirement, decimal-leading-zero);
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  @media (max-width: 30rem) {
+    :global(.projects-hero) {
+      padding-block: 2rem;
+    }
+    .hero-grid {
+      gap: var(--space-xl);
+    }
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .systems-map span {
+      min-height: 4.5rem;
+    }
+    .rigor-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 48rem) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr);
+    }
+    .editorial-split,
+    .rigor-grid,
+    .publication-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .families-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .families-list li:nth-child(odd) {
+      padding-right: var(--space-xl);
+    }
+    .families-list li:nth-child(even) {
+      padding-left: var(--space-xl);
+      border-left: 1px solid var(--color-border);
+    }
+  }
+</style>

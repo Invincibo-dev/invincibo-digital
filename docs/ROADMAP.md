@@ -1,6 +1,6 @@
 # Feuille de route
 
-Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3B ajoute la page Solutions à la structure commerciale ; les validations de contenus restent nécessaires avant les autres pages internes et études de cas complètes.
+Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3C ajoute le catalogue public et anonymisé des réalisations ; les autorisations et contenus détaillés restent nécessaires avant toute étude de cas individuelle.
 
 ## Phase 0 — Fondation
 
@@ -33,7 +33,7 @@ Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajust�
 
 - [x] Accueil ;
 - [x] Solutions ;
-- [ ] Réalisations ;
+- [x] Réalisations ;
 - [ ] Méthode ;
 - [ ] À propos ;
 - [ ] Contact.

@@ -1,0 +1,194 @@
+---
+import Badge from "../common/Badge.astro";
+import ButtonLink from "../common/ButtonLink.astro";
+import Card from "../common/Card.astro";
+import Icon from "../common/Icon.astro";
+import {
+  getPublicProjectTitle,
+  type ProjectVisibility,
+} from "../../utils/projects";
+
+interface Props {
+  internalTitle: string;
+  publicTitle?: string;
+  visibility: ProjectVisibility;
+  category: string;
+  summary: string;
+  challenge?: string;
+  solution?: string;
+  capabilities: string[];
+  statusLabel: string;
+  confidentialityNote?: string;
+  href: string;
+}
+
+const {
+  internalTitle,
+  publicTitle,
+  visibility,
+  category,
+  summary,
+  challenge,
+  solution,
+  capabilities,
+  statusLabel,
+  confidentialityNote,
+  href,
+} = Astro.props;
+const title = getPublicProjectTitle({
+  title: internalTitle,
+  publicTitle,
+  visibility,
+});
+const visibleChallenge = challenge?.trim();
+const visibleSolution = solution?.trim();
+const hasDetails = Boolean(visibleChallenge || visibleSolution);
+---
+
+<article>
+  <Card class="project-card">
+    <div class="project-card__topline">
+      <Badge>{category}</Badge>
+      <span class="project-card__status">{statusLabel}</span>
+    </div>
+    <h3>{title}</h3>
+    <p class="project-card__summary">{summary}</p>
+    {
+      hasDetails && (
+        <dl>
+          {visibleChallenge && (
+            <div>
+              <dt>Besoin traité</dt>
+              <dd>{visibleChallenge}</dd>
+            </div>
+          )}
+          {visibleSolution && (
+            <div>
+              <dt>Réponse conçue</dt>
+              <dd>{visibleSolution}</dd>
+            </div>
+          )}
+        </dl>
+      )
+    }
+    <ul aria-label={`Capacités principales de ${title}`}>
+      {capabilities.slice(0, 3).map((capability) => <li>{capability}</li>)}
+    </ul>
+    {
+      confidentialityNote && (
+        <p class="project-card__confidentiality">
+          <Icon name="check" size={18} />
+          <span>{confidentialityNote}</span>
+        </p>
+      )
+    }
+    <ButtonLink href={href} external variant="secondary">
+      Discuter d’un projet similaire<Icon slot="icon" name="external" />
+    </ButtonLink>
+  </Card>
+</article>
+
+<style>
+  article,
+  :global(.project-card) {
+    height: 100%;
+  }
+
+  :global(.project-card) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card__topline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .project-card__status {
+    max-width: 13rem;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  h3 {
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  .project-card__summary,
+  dd,
+  li,
+  .project-card__confidentiality {
+    color: var(--color-text-muted);
+  }
+
+  dl {
+    display: grid;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  dt {
+    margin-bottom: var(--space-xs);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+    font-size: 0.82rem;
+  }
+
+  .project-card__confidentiality {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    margin: var(--space-lg) 0;
+    font-size: 0.85rem;
+  }
+
+  .project-card__confidentiality :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+    color: var(--color-success);
+  }
+
+  :global(.project-card .button-link) {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  @media (max-width: 27rem) {
+    .project-card__topline {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .project-card__status {
+      text-align: left;
+    }
+  }
+</style>

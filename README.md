@@ -8,7 +8,7 @@ Slogan provisoire : « Des logiciels conçus pour faire avancer votre entreprise
 
 ## Statut
 
-**Phase 3B — Page Solutions.** La fondation technique, le design system, la page d’accueil commerciale et la page Solutions sont en place. Les autres pages internes et les études de cas complètes ne sont pas encore développées.
+**Phase 3C — Page Réalisations.** La fondation technique, le design system, la page d’accueil commerciale, la page Solutions et le catalogue public des réalisations sont en place. Les autres pages internes et les études de cas détaillées ne sont pas encore développées.
 
 État des principaux jalons :
 
@@ -16,6 +16,7 @@ Slogan provisoire : « Des logiciels conçus pour faire avancer votre entreprise
 - design system léger terminé ;
 - page d’accueil commerciale initiale terminée ;
 - page Solutions initiale terminée ;
+- page Réalisations initiale terminée, avec informations anonymisées ;
 - autres pages internes et contenus détaillés restant à développer.
 
 Le nom, le domaine `invincibodigital.com`, l’identité visuelle et certaines informations commerciales restent provisoires jusqu’à validation.
@@ -69,5 +70,6 @@ Le nom, le domaine, le téléphone, WhatsApp et les autres informations publique
 - [Design system léger](docs/DESIGN_SYSTEM.md)
 - [Page d’accueil commerciale](docs/HOMEPAGE.md)
 - [Page Solutions](docs/SOLUTIONS_PAGE.md)
+- [Page Réalisations](docs/PROJECTS_PAGE.md)
 - [Feuille de route](docs/ROADMAP.md)
 - [Règles pour les agents](AGENTS.md)

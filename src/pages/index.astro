@@ -16,9 +16,12 @@ import ProjectPreviewCard from "../components/projects/ProjectPreviewCard.astro"
 import { createWhatsAppUrl, siteConfig } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+const projects = (
+  await getCollection(
+    "projects",
+    ({ data }) => data.published && data.visibility !== "private",
+  )
+).sort((a, b) => a.data.order - b.data.order);
 
 const whatsappUrl = createWhatsAppUrl(
   `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
@@ -141,7 +144,7 @@ const reasons = [
               Discuter de mon projet
               <Icon slot="icon" name="external" />
             </ButtonLink>
-            <ButtonLink href="#realisations" variant="secondary" size="lg">
+            <ButtonLink href="/realisations/" variant="secondary" size="lg">
               Voir nos réalisations
               <Icon slot="icon" name="arrow-right" />
             </ButtonLink>
@@ -199,7 +202,9 @@ const reasons = [
         {
           projects.map((project) => (
             <ProjectPreviewCard
-              title={project.data.title}
+              internalTitle={project.data.title}
+              publicTitle={project.data.publicTitle}
+              visibility={project.data.visibility}
               category={project.data.category}
               summary={project.data.summary}
               capabilities={project.data.capabilities}
@@ -207,6 +212,12 @@ const reasons = [
             />
           ))
         }
+      </div>
+      <div class="projects-action">
+        <ButtonLink href="/realisations/" variant="secondary">
+          Découvrir toutes les réalisations
+          <Icon slot="icon" name="arrow-right" />
+        </ButtonLink>
       </div>
     </Container>
   </Section>
@@ -330,6 +341,10 @@ const reasons = [
 
   .section-content {
     margin-top: var(--space-2xl);
+  }
+
+  .projects-action {
+    margin-top: var(--space-xl);
   }
 
   .two-column-grid,

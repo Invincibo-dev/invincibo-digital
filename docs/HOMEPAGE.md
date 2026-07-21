@@ -24,7 +24,7 @@ La page d’accueil doit expliquer rapidement comment Invincibo Digital transfor
 
 ## Appels à l’action
 
-L’action principale ouvre une conversation WhatsApp générée depuis la configuration centrale. L’action secondaire mène à la section des réalisations. Le lien Solutions mène désormais à `/solutions/` ; les autres pages encore absentes restent représentées par les ancres existantes de l’accueil.
+L’action principale ouvre une conversation WhatsApp générée depuis la configuration centrale. L’action secondaire mène à `/realisations/`. Les liens Solutions et Réalisations utilisent désormais leurs routes dédiées ; les autres pages encore absentes restent représentées par les ancres existantes de l’accueil.
 
 Le CTA principal utilise la formulation « Discuter de mon projet » dans le header et le hero. Le CTA final, plus directement associé au canal, utilise « Discuter sur WhatsApp ».
 
@@ -32,7 +32,7 @@ Toutes les sections publiques disposent d’une ancre, y compris `#accueil`. Leu
 
 ## Contenus provisoires
 
-- les détails, catégories précises, capacités et captures des quatre réalisations ;
+- les études de cas détaillées, identités non autorisées et captures des quatre réalisations ;
 - la photographie officielle du fondateur ;
 - les informations légales et coordonnées non encore validées ;
 - le domaine et l’identité visuelle définitive.
