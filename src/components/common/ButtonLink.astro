@@ -1,0 +1,133 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary" | "ghost";
+type Size = "sm" | "md" | "lg";
+
+interface Props extends Omit<HTMLAttributes<"a">, "class"> {
+  href: string;
+  variant?: Variant;
+  size?: Size;
+  external?: boolean;
+  fullWidth?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  external = false,
+  fullWidth = false,
+  class: className,
+  ...attributes
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "button-link",
+    `button-link--${variant}`,
+    `button-link--${size}`,
+    { "button-link--full": fullWidth },
+    className,
+  ]}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  {...attributes}
+>
+  <span class="button-link__label"><slot /></span>
+  <slot name="icon" />
+</a>
+
+<style>
+  .button-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .button-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .button-link:active {
+    transform: translateY(0);
+  }
+
+  .button-link--primary {
+    background: var(--color-primary);
+    color: var(--color-text);
+  }
+
+  .button-link--primary:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .button-link--secondary {
+    border-color: var(--color-primary);
+    background: transparent;
+    color: var(--color-focus);
+  }
+
+  .button-link--secondary:hover {
+    border-color: var(--color-focus);
+    background: var(--color-primary-soft);
+    color: var(--color-text);
+  }
+
+  .button-link--ghost {
+    border-color: transparent;
+    color: var(--color-text-muted);
+  }
+
+  .button-link--ghost:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-focus);
+  }
+
+  .button-link--primary:active {
+    background: var(--color-primary-hover);
+    box-shadow: inset 0 0 0 1px var(--color-focus);
+  }
+
+  .button-link--secondary:active,
+  .button-link--ghost:active {
+    background: var(--color-surface-elevated);
+  }
+
+  .button-link--sm {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.875rem;
+  }
+
+  .button-link--md {
+    padding: 0.75rem 1.1rem;
+  }
+
+  .button-link--lg {
+    min-height: 3.25rem;
+    padding: 0.9rem 1.35rem;
+    font-size: 1.0625rem;
+  }
+
+  .button-link--full {
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+}
+
+const { number, title, description } = Astro.props;
+---
+
+<article class="step">
+  <span>{number}</span>
+  <div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</article>
+
+<style>
+  .step {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  h3 {
+    margin-bottom: var(--space-xs);
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

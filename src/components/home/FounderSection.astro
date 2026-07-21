@@ -1,0 +1,74 @@
+---
+import Container from "../common/Container.astro";
+import Section from "../common/Section.astro";
+import SectionHeading from "../common/SectionHeading.astro";
+---
+
+<Section id="a-propos">
+  <Container>
+    <div class="founder-grid">
+      <div
+        class="portrait-placeholder"
+        role="img"
+        aria-label="Photographie officielle à venir"
+      >
+        <span>Photo officielle à venir</span>
+      </div>
+      <div>
+        <SectionHeading
+          eyebrow="À propos"
+          title="Une approche proche de vos opérations"
+        />
+        <p class="name">Laveniel Séjour</p>
+        <p class="role">Entrepreneur et développeur de solutions numériques.</p>
+        <p class="statement">
+          Je conçois des outils numériques pour aider les entreprises à mieux
+          organiser leurs opérations, suivre leur activité et gagner en
+          contrôle.
+        </p>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .founder-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .portrait-placeholder {
+    display: grid;
+    min-height: 20rem;
+    place-items: center;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .name {
+    margin: var(--space-xl) 0 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .role {
+    margin: 0;
+    color: var(--color-focus);
+  }
+
+  .statement {
+    margin: var(--space-lg) 0 0;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 48rem) {
+    .founder-grid {
+      grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+    }
+  }
+</style>

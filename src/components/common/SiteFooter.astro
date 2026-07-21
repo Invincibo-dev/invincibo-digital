@@ -1,0 +1,116 @@
+---
+import {
+  createWhatsAppUrl,
+  formatPhoneForDisplay,
+  mainNavigation,
+  siteConfig,
+} from "../../config/site";
+import Container from "./Container.astro";
+
+const year = new Date().getFullYear();
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+const displayPhone = formatPhoneForDisplay(siteConfig.phone);
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="footer-grid">
+      <div>
+        <a class="footer-brand" href="/">{siteConfig.name}</a>
+        <p>{siteConfig.footerDescription}</p>
+      </div>
+      <nav aria-label="Navigation du pied de page">
+        <h2>Explorer</h2>
+        <ul>
+          {
+            mainNavigation.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div>
+        <h2>Nous contacter</h2>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
+          >WhatsApp</a
+        >
+        <a href={`tel:${siteConfig.phone}`}>{displayPhone}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} {siteConfig.name}. Droits réservés.</p>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-2xl) var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-2xl);
+  }
+
+  .footer-brand {
+    font-size: 1.2rem;
+    font-weight: 720;
+    text-decoration: none;
+  }
+
+  .footer-grid p,
+  .footer-grid a,
+  .footer-bottom {
+    color: var(--color-text-muted);
+  }
+
+  .footer-grid p {
+    margin: var(--space-sm) 0 0;
+  }
+
+  .footer-grid h2 {
+    margin-bottom: var(--space-md);
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li + li {
+    margin-top: var(--space-xs);
+  }
+
+  .footer-grid a:not(.footer-brand) {
+    display: block;
+    width: fit-content;
+    min-height: 2.25rem;
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.875rem;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-grid {
+      grid-template-columns: minmax(0, 2fr) repeat(2, minmax(10rem, 1fr));
+    }
+  }
+</style>

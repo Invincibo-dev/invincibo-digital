@@ -1,0 +1,168 @@
+---
+import Badge from "../common/Badge.astro";
+---
+
+<div class="preview" aria-label="Aperçu conceptuel d’une interface de gestion">
+  <div class="preview-topbar">
+    <span class="preview-brand">Espace de gestion</span>
+    <Badge variant="neutral">Aperçu conceptuel</Badge>
+  </div>
+  <div class="preview-body">
+    <aside aria-hidden="true">
+      <span class="active"></span><span></span><span></span><span></span>
+    </aside>
+    <div class="preview-content">
+      <div class="preview-heading"><span></span><span></span></div>
+      <div class="metrics" aria-hidden="true">
+        <div><span></span><strong>Vue générale</strong></div>
+        <div><span></span><strong>Suivi</strong></div>
+        <div><span></span><strong>Activité</strong></div>
+      </div>
+      <div class="operations">
+        <div class="operations-title">Opérations récentes</div>
+        <div class="operation"><span></span><i></i></div>
+        <div class="operation"><span></span><i></i></div>
+        <div class="operation"><span></span><i></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .preview {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .preview-topbar {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .preview-brand,
+  .operations-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .preview-body {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    min-height: 22rem;
+  }
+
+  aside {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-right: 1px solid var(--color-border);
+  }
+
+  aside span {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    background: var(--color-border);
+  }
+
+  aside .active {
+    background: var(--color-primary);
+  }
+
+  .preview-content {
+    min-width: 0;
+    padding: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .preview-heading {
+    display: grid;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .preview-heading span {
+    width: 45%;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+
+  .preview-heading span:first-child {
+    width: 68%;
+    height: 0.8rem;
+    background: var(--color-text-muted);
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xs);
+  }
+
+  .metrics div {
+    min-width: 0;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-elevated);
+  }
+
+  .metrics span {
+    display: block;
+    width: 1.25rem;
+    height: 0.25rem;
+    margin-bottom: var(--space-xs);
+    background: var(--color-primary);
+  }
+
+  .metrics strong {
+    overflow-wrap: anywhere;
+    font-size: 0.65rem;
+  }
+
+  .operations {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .operation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .operation:last-child {
+    border-bottom: 0;
+  }
+
+  .operation span,
+  .operation i {
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--color-border);
+  }
+
+  .operation span {
+    width: 55%;
+  }
+
+  .operation i {
+    width: 18%;
+    background: var(--color-primary-soft);
+  }
+</style>

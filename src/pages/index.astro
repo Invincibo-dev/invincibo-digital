@@ -1,0 +1,402 @@
+---
+import { getCollection } from "astro:content";
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import FounderSection from "../components/home/FounderSection.astro";
+import HeroPreview from "../components/home/HeroPreview.astro";
+import ProblemCard from "../components/home/ProblemCard.astro";
+import ProcessStep from "../components/home/ProcessStep.astro";
+import SolutionCard from "../components/home/SolutionCard.astro";
+import ProjectPreviewCard from "../components/projects/ProjectPreviewCard.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+
+const problems = [
+  {
+    title: "Informations dispersées",
+    description:
+      "Les données utiles sont réparties entre plusieurs outils, fichiers et conversations.",
+  },
+  {
+    title: "Tâches répétitives",
+    description:
+      "Des opérations manuelles mobilisent du temps et augmentent le risque d’oubli.",
+  },
+  {
+    title: "Suivi difficile",
+    description:
+      "Ventes, clients ou opérations deviennent plus difficiles à suivre quand le volume augmente.",
+  },
+  {
+    title: "Visibilité limitée",
+    description:
+      "Les informations nécessaires pour décider ne sont pas toujours accessibles au bon moment.",
+  },
+] as const;
+
+const solutions = [
+  {
+    title: "Logiciels de gestion",
+    description:
+      "Centralisez les informations et les opérations essentielles dans un outil adapté à votre activité.",
+    benefit: "Un suivi plus clair au quotidien",
+    icon: "business",
+  },
+  {
+    title: "Applications métier",
+    description:
+      "Équipez vos opérations d’une application conçue autour de vos rôles, règles et processus.",
+    benefit: "Un outil aligné sur votre fonctionnement",
+    icon: "code",
+  },
+  {
+    title: "Automatisations",
+    description:
+      "Reliez les étapes répétitives qui peuvent être exécutées de façon fiable sans ressaisie inutile.",
+    benefit: "Moins de tâches manuelles",
+    icon: "automation",
+  },
+  {
+    title: "Modernisation de systèmes",
+    description:
+      "Faites évoluer un outil existant devenu difficile à maintenir ou insuffisant pour vos besoins actuels.",
+    benefit: "Une base plus claire pour avancer",
+    icon: "code",
+  },
+] as const;
+
+const process = [
+  [
+    "Compréhension du besoin",
+    "Nous observons vos opérations, vos difficultés et vos objectifs.",
+  ],
+  [
+    "Cadrage",
+    "Nous clarifions le périmètre, les priorités et les contraintes du projet.",
+  ],
+  [
+    "Conception",
+    "Nous organisons les parcours et les fonctions autour du travail réel.",
+  ],
+  [
+    "Développement",
+    "Nous construisons progressivement la solution définie ensemble.",
+  ],
+  [
+    "Tests et mise en production",
+    "Nous vérifions les usages essentiels avant la mise à disposition.",
+  ],
+  [
+    "Support et évolution",
+    "Nous préparons les ajustements utiles après la livraison.",
+  ],
+] as const;
+
+const reasons = [
+  "Compréhension des réalités des petites entreprises",
+  "Solutions adaptées au fonctionnement de chaque activité",
+  "Communication claire pendant le projet",
+  "Sécurité et traçabilité définies selon les besoins",
+  "Accompagnement après la livraison",
+  "Échanges possibles en français et en créole",
+] as const;
+---
+
+<BaseLayout
+  home
+  title={siteConfig.name}
+  description="Invincibo Digital transforme les opérations dispersées et manuelles en systèmes numériques clairs, fiables et contrôlables."
+  canonical={siteConfig.domain}
+>
+  <Section id="accueil" class="hero">
+    <Container>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <Badge variant="primary">Solutions logicielles sur mesure</Badge>
+          <h1>
+            Transformez vos opérations manuelles en un système clair et
+            contrôlable.
+          </h1>
+          <p class="hero-lead">
+            Invincibo Digital conçoit des logiciels de gestion, des applications
+            métier et des automatisations rapides à utiliser pour les
+            entreprises qui veulent mieux organiser leurs activités, contrôler
+            leurs opérations et se développer.
+          </p>
+          <div class="hero-actions">
+            <ButtonLink href={whatsappUrl} external size="lg">
+              Discuter de mon projet
+              <Icon slot="icon" name="external" />
+            </ButtonLink>
+            <ButtonLink href="#realisations" variant="secondary" size="lg">
+              Voir nos réalisations
+              <Icon slot="icon" name="arrow-right" />
+            </ButtonLink>
+          </div>
+          <p class="trust-line">
+            <Icon name="check" />
+            <span
+              >Solutions conçues selon les réalités de votre entreprise.</span
+            >
+          </p>
+        </div>
+        <HeroPreview />
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="problemes" variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Quand l’activité évolue"
+        title="Votre entreprise grandit, mais vos outils ne suivent plus."
+        description="WhatsApp, Excel, les cahiers et les fichiers peuvent aider au départ. Quand les opérations se multiplient, les limites deviennent plus visibles."
+      />
+      <div class="four-column-grid section-content">
+        {
+          problems.map((problem, index) => (
+            <ProblemCard number={`0${index + 1}`} {...problem} />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="solutions">
+    <Container>
+      <SectionHeading
+        eyebrow="Ce que nous construisons"
+        title="Des outils qui remettent vos opérations sous contrôle."
+        description="Chaque solution part de votre fonctionnement réel, pas d’un modèle générique imposé à votre entreprise."
+      />
+      <div class="two-column-grid section-content">
+        {solutions.map((solution) => <SolutionCard {...solution} />)}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="realisations" variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Réalisations"
+        title="Des solutions construites autour de besoins réels."
+        description="Les études de cas détaillées seront publiées après validation des informations et des éléments pouvant être rendus publics."
+      />
+      <div class="two-column-grid section-content">
+        {
+          projects.map((project) => (
+            <ProjectPreviewCard
+              title={project.data.title}
+              category={project.data.category}
+              summary={project.data.summary}
+              capabilities={project.data.capabilities}
+              caseStudyReady={project.data.caseStudyReady}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="methode">
+    <Container>
+      <div class="split-heading">
+        <SectionHeading
+          eyebrow="Notre méthode"
+          title="Construire autour du fonctionnement réel de l’entreprise."
+          description="Le projet avance par étapes claires, de la compréhension des opérations jusqu’au support de la solution."
+        />
+        <div class="process-grid">
+          {
+            process.map(([title, description], index) => (
+              <ProcessStep
+                number={`0${index + 1}`}
+                title={title}
+                description={description}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="pourquoi" variant="surface">
+    <Container>
+      <div class="why-grid">
+        <SectionHeading
+          eyebrow="Pourquoi Invincibo Digital"
+          title="Une collaboration claire, centrée sur vos besoins."
+          description="Nous cherchons d’abord à comprendre vos contraintes avant de proposer la manière de les traiter."
+        />
+        <Card class="reasons-card">
+          <ul class="reasons-list">
+            {
+              reasons.map((reason) => (
+                <li>
+                  <Icon name="check" size={19} /> <span>{reason}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <FounderSection />
+
+  <Section id="contact" variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Parlons de votre projet"
+          title="Votre activité mérite un système construit pour sa réalité."
+          description="Présentez-nous vos opérations, vos difficultés et vos objectifs. Nous vous aiderons à identifier la solution numérique adaptée."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg">
+          Discuter sur WhatsApp
+          <Icon slot="icon" name="external" />
+        </ButtonLink>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.hero) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .hero-grid,
+  .split-heading,
+  .why-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    max-width: 15ch;
+    margin: 1.25rem 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+    line-height: 1.08;
+  }
+
+  .hero-lead {
+    color: var(--color-text-muted);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .trust-line {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    margin: var(--space-md) 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .trust-line :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+
+  .trust-line span {
+    min-width: 0;
+  }
+
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+
+  .two-column-grid,
+  .four-column-grid,
+  .process-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .process-grid {
+    gap: var(--space-xl);
+  }
+
+  .reasons-list {
+    display: grid;
+    gap: var(--space-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reasons-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .reasons-list :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.25rem;
+    color: var(--color-success);
+  }
+
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  @media (max-width: 30rem) {
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 42rem) {
+    .two-column-grid,
+    .four-column-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(26rem, 0.95fr);
+    }
+
+    .four-column-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .split-heading,
+    .why-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+</style>

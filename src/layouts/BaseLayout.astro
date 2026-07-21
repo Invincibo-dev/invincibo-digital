@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../config/site";
+import SiteFooter from "../components/common/SiteFooter.astro";
+import SiteHeader from "../components/common/SiteHeader.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  home?: boolean;
+  noindex?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  canonical?: string;
+  openGraphImage?: string;
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  home = false,
+  noindex = false,
+  showHeader = true,
+  showFooter = true,
+  canonical,
+  openGraphImage,
+} = Astro.props;
+const documentTitle = home
+  ? (title ?? siteConfig.name)
+  : `${title ?? siteConfig.name} | ${siteConfig.name}`;
+---
+
+<!doctype html>
+<html lang={siteConfig.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={siteConfig.locale.replace("-", "_")} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {openGraphImage && <meta property="og:image" content={openGraphImage} />}
+    <title>{documentTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+    {showHeader && <SiteHeader />}
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    {showFooter && <SiteFooter />}
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# Dependencies and generated output
+node_modules/
+dist/
+.astro/
+
+# Environment files (keep the documented example)
+.env
+.env.*
+!.env.example
+
+# Logs and caches
+*.log
+.eslintcache
+.cache/
+
+# Editors, operating systems and temporary files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

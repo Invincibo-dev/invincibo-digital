@@ -1,0 +1,415 @@
+---
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const colors = [
+  ["Arrière-plan", "bg"],
+  ["Surface", "surface"],
+  ["Surface élevée", "surface-elevated"],
+  ["Texte", "text"],
+  ["Texte atténué", "text-muted"],
+  ["Primaire", "primary"],
+  ["Accent", "accent"],
+  ["Succès", "success"],
+  ["Avertissement", "warning"],
+  ["Danger", "danger"],
+] as const;
+
+const icons = [
+  "arrow-right",
+  "external",
+  "check",
+  "code",
+  "business",
+  "automation",
+] as const;
+---
+
+<BaseLayout
+  title="Design system"
+  description="Prévisualisation interne du design system provisoire."
+  noindex
+  showHeader={false}
+  showFooter={false}
+>
+  <Section class="preview-hero">
+    <Container>
+      <Badge variant="accent">Prévisualisation interne</Badge>
+      <SectionHeading
+        class="preview-heading"
+        level={1}
+        eyebrow="Phase 2"
+        title="Design system léger"
+        description="Référence de développement pour les tokens et composants provisoires. Cette page n’appartient pas à la navigation publique."
+      />
+    </Container>
+  </Section>
+
+  <Section id="palette" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="Palette"
+        description="Couleurs sémantiques du thème sombre principal."
+      />
+      <div class="swatch-grid">
+        {
+          colors.map(([label, token]) => (
+            <div class="swatch">
+              <span
+                class="swatch__color"
+                style={`background: var(--color-${token})`}
+              />
+              <strong>{label}</strong>
+              <code>--color-{token}</code>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="typography" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="Typographie"
+        description="Pile système, échelle fluide et longueurs de lecture contrôlées."
+      />
+      <div class="type-samples">
+        <p class="display">Affichage principal</p>
+        <h1>Titre de niveau un</h1>
+        <h2>Titre de niveau deux</h2>
+        <h3>Titre de niveau trois</h3>
+        <p class="text-large">
+          Texte large pour une introduction concise et lisible.
+        </p>
+        <p>Texte courant destiné aux explications et contenus généraux.</p>
+        <p class="text-small">Petit texte pour une information secondaire.</p>
+        <p class="text-label">Label court</p>
+        <code>const fondation = "claire";</code>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="components" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="Composants"
+        description="Variantes fondamentales sans logique métier ni JavaScript client."
+      />
+
+      <div class="preview-block">
+        <h3>Boutons-liens</h3>
+        <div class="row">
+          <ButtonLink href="#components" size="sm">Primaire petit</ButtonLink>
+          <ButtonLink href="#components">Primaire moyen</ButtonLink>
+          <ButtonLink href="#components" size="lg">Primaire grand</ButtonLink>
+          <ButtonLink href="#components" variant="secondary"
+            >Secondaire</ButtonLink
+          >
+          <ButtonLink href="#components" variant="ghost">
+            Fantôme <Icon slot="icon" name="arrow-right" />
+          </ButtonLink>
+        </div>
+      </div>
+
+      <div class="preview-block">
+        <h3>Badges</h3>
+        <div class="row">
+          <Badge>Neutre</Badge>
+          <Badge variant="primary">Primaire</Badge>
+          <Badge variant="accent">Accent</Badge>
+          <Badge variant="success">Disponible</Badge>
+        </div>
+      </div>
+
+      <div class="preview-block">
+        <h3>Focus visible</h3>
+        <p class="preview-help">
+          L’exemple ci-dessous reproduit l’indicateur obtenu au clavier avec la
+          touche Tab.
+        </p>
+        <ButtonLink class="forced-focus" href="#components" variant="secondary">
+          Exemple avec focus
+        </ButtonLink>
+      </div>
+
+      <div class="preview-block">
+        <SectionHeading
+          eyebrow="Exemple"
+          title="Un titre de section réutilisable"
+          description="L’alignement, le niveau de titre et le contenu secondaire restent configurables."
+        />
+      </div>
+
+      <div class="card-grid">
+        <Card>
+          <Icon name="business" size={28} />
+          <h3>Carte standard</h3>
+          <p>
+            Surface structurée destinée à recevoir différents types de contenu.
+          </p>
+        </Card>
+        <Card interactive>
+          <Icon name="automation" size={28} />
+          <h3>Carte interactive</h3>
+          <p>
+            Le focus d’un lien interne à la carte renforce visuellement sa
+            bordure.
+          </p>
+          <a href="#forms">Voir les champs de démonstration</a>
+        </Card>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="icons" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="Icônes"
+        description="SVG locaux utilisant currentColor, décoratifs par défaut."
+      />
+      <div class="icon-grid">
+        {
+          icons.map((name) => (
+            <div class="icon-item">
+              <Icon name={name} size={28} />
+              <code>{name}</code>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="forms" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="États de formulaire"
+        description="Styles visuels uniquement ; aucun envoi n’est connecté."
+      />
+      <div class="form-grid">
+        <div>
+          <label class="field-label" for="demo-name">Nom</label>
+          <input
+            id="demo-name"
+            type="text"
+            placeholder="Votre nom"
+            aria-describedby="name-help"
+          />
+          <p class="field-help" id="name-help">
+            Une indication utile associée au champ.
+          </p>
+        </div>
+        <div>
+          <label class="field-label" for="demo-email"
+            >Adresse électronique</label
+          >
+          <input
+            id="demo-email"
+            type="email"
+            value="adresse invalide"
+            aria-invalid="true"
+            aria-describedby="email-error"
+          />
+          <p class="field-error" id="email-error">
+            Saisissez une adresse au format valide.
+          </p>
+        </div>
+        <div>
+          <label class="field-label" for="demo-select">Type de besoin</label>
+          <select id="demo-select">
+            <option>Choisir une option</option>
+            <option>Logiciel métier</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="demo-disabled">Champ désactivé</label>
+          <input
+            id="demo-disabled"
+            type="text"
+            value="Non disponible"
+            disabled
+          />
+        </div>
+        <div class="form-grid__wide">
+          <label class="field-label" for="demo-message">Message</label>
+          <textarea
+            id="demo-message"
+            placeholder="Décrivez brièvement votre besoin"></textarea>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="spacing" class="preview-section">
+    <Container>
+      <SectionHeading
+        title="Espacements"
+        description="Échelle courte fondée sur les tokens globaux."
+      />
+      <div class="spacing-list">
+        {
+          (["xs", "sm", "md", "lg", "xl", "2xl"] as const).map((space) => (
+            <div class="spacing-item">
+              <code>--space-{space}</code>
+              <span style={`width: var(--space-${space})`} />
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .preview-heading {
+    margin-top: var(--space-lg);
+  }
+
+  :global(.preview-hero) {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  :global(.preview-section) {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .swatch-grid,
+  .card-grid,
+  .form-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .swatch-grid {
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  }
+
+  .swatch {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  .swatch strong {
+    color: var(--color-text);
+  }
+
+  .swatch__color {
+    min-height: 5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .type-samples,
+  .preview-block {
+    margin-top: var(--space-2xl);
+  }
+
+  .type-samples > * {
+    margin-bottom: var(--space-lg);
+  }
+
+  .display {
+    font-size: clamp(2.6rem, 8vw, 5.25rem);
+    font-weight: 720;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .row,
+  .icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .preview-help {
+    color: var(--color-text-muted);
+  }
+
+  :global(.forced-focus) {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  .card-grid,
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card-grid {
+    margin-top: var(--space-2xl);
+  }
+
+  .card-grid :global(h3) {
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  .card-grid :global(p) {
+    color: var(--color-text-muted);
+  }
+
+  .icon-grid {
+    margin-top: var(--space-xl);
+  }
+
+  .icon-item {
+    display: grid;
+    min-width: 8rem;
+    place-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-focus);
+  }
+
+  .icon-item code {
+    color: var(--color-text-muted);
+  }
+
+  .form-grid__wide {
+    grid-column: 1 / -1;
+  }
+
+  .spacing-list {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .spacing-item {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .spacing-item span {
+    display: block;
+    height: 1rem;
+    min-width: 0.5rem;
+    background: var(--color-primary);
+  }
+
+  @media (max-width: 42rem) {
+    .card-grid,
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-grid__wide {
+      grid-column: auto;
+    }
+  }
+</style>

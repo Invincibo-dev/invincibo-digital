@@ -1,0 +1,27 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  variant?: "default" | "surface" | "elevated";
+}
+
+const { id, class: className, variant = "default" } = Astro.props;
+---
+
+<section id={id} class:list={["section", `section--${variant}`, className]}>
+  <slot />
+</section>
+
+<style>
+  .section {
+    padding-block: var(--space-section);
+  }
+
+  .section--surface {
+    background: var(--color-surface);
+  }
+
+  .section--elevated {
+    background: var(--color-surface-elevated);
+  }
+</style>

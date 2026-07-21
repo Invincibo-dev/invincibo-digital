@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  align?: "left" | "center";
+  level?: 1 | 2 | 3;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow,
+  align = "left",
+  level = 2,
+  class: className,
+} = Astro.props;
+const HeadingTag = `h${level}` as const;
+---
+
+<header
+  class:list={["section-heading", `section-heading--${align}`, className]}
+>
+  {eyebrow && <p class="section-heading__eyebrow">{eyebrow}</p>}
+  <HeadingTag>{title}</HeadingTag>
+  {description && <p class="section-heading__description">{description}</p>}
+</header>
+
+<style>
+  .section-heading {
+    max-width: 46rem;
+  }
+
+  .section-heading--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .section-heading__eyebrow {
+    margin-bottom: var(--space-sm);
+    color: var(--color-focus);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-heading :global(h1),
+  .section-heading :global(h2),
+  .section-heading :global(h3) {
+    margin-bottom: var(--space-md);
+  }
+
+  .section-heading__description {
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+import Badge from "../common/Badge.astro";
+import Card from "../common/Card.astro";
+
+interface Props {
+  title: string;
+  category: string;
+  summary: string;
+  capabilities?: string[];
+  caseStudyReady?: boolean;
+}
+
+const {
+  title,
+  category,
+  summary,
+  capabilities = [],
+  caseStudyReady = false,
+} = Astro.props;
+---
+
+<Card class="project-card">
+  <div class="project-image" aria-hidden="true">
+    <span>Emplacement réservé à une capture autorisée</span>
+  </div>
+  <div class="project-body">
+    <Badge>{category}</Badge>
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    {
+      capabilities.length > 0 && (
+        <ul>
+          {capabilities.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+    {!caseStudyReady && <p class="status">Étude de cas en préparation</p>}
+  </div>
+</Card>
+
+<style>
+  :global(.project-card) {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .project-image {
+    display: grid;
+    min-height: 11rem;
+    place-items: center;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-elevated);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .project-body {
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  h3 {
+    margin: var(--space-md) 0 var(--space-sm);
+  }
+
+  p,
+  li {
+    color: var(--color-text-muted);
+  }
+
+  ul {
+    padding-left: var(--space-lg);
+  }
+
+  .status {
+    margin: var(--space-lg) 0 0;
+    color: var(--color-focus);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+</style>

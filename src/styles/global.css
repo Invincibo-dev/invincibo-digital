@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  --color-bg: #07111f;
+  --color-surface: #0d1b2a;
+  --color-surface-elevated: #13263a;
+  --color-text: #f8fafc;
+  --color-text-muted: #b3b7bf;
+  --color-primary: #176fba;
+  --color-primary-hover: #125a98;
+  --color-primary-soft: #112f4d;
+  --color-accent: #d9a928;
+  --color-border: #26384c;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-focus: #60a5fa;
+
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-section: clamp(4rem, 9vw, 7rem);
+  --container-max: 75rem;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 4.25rem;
+  --anchor-offset: calc(var(--header-height) + var(--space-md));
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --shadow-sm: 0 0.5rem 1.5rem rgb(0 0 0 / 0.16);
+  --shadow-md: 0 1rem 2.5rem rgb(0 0 0 / 0.22);
+}
+
+/* Tailwind 4 consomme les mêmes tokens : aucune seconde palette à maintenir. */
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-foreground: var(--color-text);
+  --color-muted: var(--color-text-muted);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-soft: var(--color-primary-soft);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-focus: var(--color-focus);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--anchor-offset);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+
+:where(h1, h2, h3, p) {
+  margin-block-start: 0;
+}
+
+:where(h1, h2, h3) {
+  color: var(--color-text);
+  font-weight: 680;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 6.5vw, 4.25rem);
+  line-height: 1.06;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.12;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+}
+
+p {
+  max-width: 68ch;
+}
+
+:where(a) {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+:where(img, picture, svg) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(button, input, textarea, select) {
+  font: inherit;
+}
+
+:where(button, [type="button"], [type="submit"], [type="reset"]) {
+  cursor: pointer;
+}
+
+:where(input, textarea, select) {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.7rem 0.85rem;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+:where(input, textarea, select)::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+
+:where(input, textarea, select):disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+:where(main[id], section[id]) {
+  scroll-margin-top: var(--anchor-offset);
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 100;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.text-large {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  line-height: 1.55;
+}
+
+.text-small {
+  font-size: 0.875rem;
+}
+
+.text-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field-help,
+.field-error {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.875rem;
+}
+
+.field-help {
+  color: var(--color-text-muted);
+}
+
+.field-error {
+  color: #fca5a5;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

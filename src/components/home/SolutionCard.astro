@@ -1,0 +1,57 @@
+---
+import Card from "../common/Card.astro";
+import Icon from "../common/Icon.astro";
+
+type IconName = "business" | "code" | "automation";
+
+interface Props {
+  title: string;
+  description: string;
+  benefit: string;
+  icon: IconName;
+}
+
+const { title, description, benefit, icon } = Astro.props;
+---
+
+<Card class="solution-card">
+  <div class="icon"><Icon name={icon} size={26} /></div>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <p class="benefit"><Icon name="check" size={18} /> {benefit}</p>
+</Card>
+
+<style>
+  .icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-soft);
+    color: var(--color-focus);
+  }
+
+  h3 {
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  p {
+    color: var(--color-text-muted);
+  }
+
+  .benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    margin: var(--space-lg) 0 0;
+    color: var(--color-text);
+    font-weight: 650;
+  }
+
+  .benefit :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+</style>
