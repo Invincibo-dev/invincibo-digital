@@ -1,0 +1,556 @@
+---
+import { getCollection } from "astro:content";
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import CapabilityList from "../components/solutions/CapabilityList.astro";
+import NeedSignal from "../components/solutions/NeedSignal.astro";
+import ServiceDetailCard from "../components/solutions/ServiceDetailCard.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = (
+  await getCollection("services", ({ data }) => data.published)
+).sort((a, b) => a.data.order - b.data.order);
+
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+
+const needSignals = [
+  "Les informations sont réparties dans plusieurs outils.",
+  "Les mêmes données sont saisies plusieurs fois.",
+  "Certaines opérations dépendent d’une seule personne.",
+  "Les responsables manquent de visibilité sur l’activité.",
+  "Les erreurs sont difficiles à retracer.",
+  "Le logiciel actuel ne correspond plus aux processus réels.",
+] as const;
+
+const capabilities = [
+  "Authentification et rôles",
+  "Gestion des clients",
+  "Ventes et paiements",
+  "Gestion du stock",
+  "Tableaux de bord",
+  "Rapports",
+  "Historique et traçabilité",
+  "Notifications",
+  "Automatisations",
+  "Accès mobile",
+  "Sauvegarde selon l’architecture",
+  "Intégrations avec des services externes",
+] as const;
+
+const choices = [
+  {
+    title: "Besoin simple",
+    text: "Un outil existant ou une configuration légère peut suffire lorsque les règles sont courantes et le périmètre limité.",
+  },
+  {
+    title: "Besoin spécifique",
+    text: "Une application métier ou une personnalisation peut être nécessaire lorsque vos règles et parcours sont particuliers.",
+  },
+  {
+    title: "Opérations critiques",
+    text: "Une architecture plus rigoureuse peut être requise, avec permissions, audit, sauvegardes et tests adaptés.",
+  },
+] as const;
+
+const startSteps = [
+  [
+    "Échange initial",
+    "Vous décrivez simplement votre activité et les difficultés rencontrées.",
+  ],
+  [
+    "Diagnostic du besoin",
+    "Nous clarifions les opérations, les contraintes et les priorités.",
+  ],
+  [
+    "Proposition de périmètre",
+    "Nous présentons une approche raisonnable et les éléments à prévoir.",
+  ],
+  [
+    "Décision de lancement",
+    "Vous décidez de poursuivre lorsque le besoin et le cadre sont suffisamment clairs.",
+  ],
+] as const;
+
+const faq = [
+  [
+    "Dois-je déjà avoir un cahier des charges ?",
+    "Non. Vous pouvez commencer par expliquer comment votre entreprise fonctionne aujourd’hui, les difficultés observées et ce que vous souhaitez mieux contrôler.",
+  ],
+  [
+    "Travaillez-vous uniquement avec de grandes entreprises ?",
+    "Non. Les solutions s’adressent notamment aux PME, commerces, centres de formation, institutions et entreprises de services dont les opérations ont besoin d’être mieux structurées.",
+  ],
+  [
+    "Pouvez-vous améliorer un système existant ?",
+    "Oui, après analyse. Selon son état, il peut être pertinent de le faire évoluer progressivement, de le réorganiser ou de préparer son remplacement.",
+  ],
+  [
+    "Est-ce qu’une application sur mesure est toujours nécessaire ?",
+    "Non. Un outil existant peut suffire pour un besoin simple. Une solution sur mesure devient pertinente lorsque les règles ou contraintes justifient cette approche.",
+  ],
+  [
+    "Comment commence l’estimation d’un projet ?",
+    "Elle commence par la compréhension du besoin et du périmètre. Une estimation sérieuse dépend des fonctions, des contraintes, des intégrations et du niveau de qualité attendu.",
+  ],
+] as const;
+---
+
+<BaseLayout
+  title="Solutions logicielles pour entreprises"
+  description="Logiciels de gestion, applications métier, automatisations et modernisation de systèmes pour aider les entreprises à mieux organiser et contrôler leurs opérations."
+  canonical={`${siteConfig.domain}/solutions/`}
+>
+  <Section class="solutions-hero">
+    <Container>
+      <div class="hero-grid">
+        <div>
+          <Badge variant="primary">Solutions numériques sur mesure</Badge>
+          <h1>
+            Des systèmes conçus autour du fonctionnement réel de votre
+            entreprise.
+          </h1>
+          <p class="hero-lead">
+            Nous analysons vos opérations, vos difficultés et vos objectifs afin
+            de construire une solution adaptée à votre manière de travailler.
+          </p>
+          <div class="hero-actions">
+            <ButtonLink href={whatsappUrl} external size="lg">
+              Discuter de mon projet<Icon slot="icon" name="external" />
+            </ButtonLink>
+            <ButtonLink href="/#methode" variant="secondary" size="lg">
+              Comprendre notre méthode<Icon slot="icon" name="arrow-right" />
+            </ButtonLink>
+          </div>
+        </div>
+        <div
+          class="concept"
+          aria-label="Aperçu conceptuel du passage d’opérations dispersées vers un système centralisé"
+        >
+          <p>Aperçu conceptuel</p>
+          <div class="concept-flow">
+            <div>
+              <span>Fichiers</span><span>Messages</span><span>Notes</span>
+            </div>
+            <Icon name="arrow-right" size={26} />
+            <div class="central">
+              <Icon name="business" size={25} /><strong
+                >Système centralisé</strong
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Reconnaître le besoin"
+        title="Un système dédié peut devenir pertinent lorsque…"
+        description="Ces signes apparaissent souvent lorsque des outils utiles au départ ne suffisent plus à suivre la croissance de l’activité."
+      />
+      <ul class="signals-grid section-content">
+        {needSignals.map((signal) => <NeedSignal text={signal} />)}
+      </ul>
+    </Container>
+  </Section>
+
+  <Section id="services">
+    <Container>
+      <SectionHeading
+        eyebrow="Quatre catégories"
+        title="Choisir une solution selon le problème à résoudre."
+        description="Le choix dépend des opérations, des règles métier et des limites rencontrées — pas simplement d’une préférence technique."
+      />
+      <div class="services-list section-content">
+        {
+          services.map((service, index) => (
+            <ServiceDetailCard
+              index={index + 1}
+              {...service.data}
+              href={createWhatsAppUrl(
+                `Bonjour ${siteConfig.name}, je souhaite discuter de la solution « ${service.data.title} » pour mon entreprise.`,
+              )}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Une recommandation responsable"
+          title="Construire sur mesure n’est pas toujours la première réponse."
+        />
+        <div class="editorial-copy">
+          <p>
+            Un outil existant peut suffire lorsque le besoin est simple et suit
+            des règles courantes.
+          </p>
+          <p>
+            Une personnalisation devient utile lorsque les rôles, validations ou
+            processus sont propres à l’entreprise.
+          </p>
+          <p>
+            Le sur mesure devient pertinent lorsque les limites actuelles
+            prennent du temps, créent des erreurs ou empêchent l’activité
+            d’évoluer correctement.
+          </p>
+          <p>
+            <strong
+              >Notre première responsabilité est de comprendre le besoin avant
+              de recommander une construction.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <SectionHeading
+        eyebrow="Périmètre possible"
+        title="Ce que le projet peut inclure."
+        description="Les fonctions sont sélectionnées selon le projet. Cette liste ne constitue pas un forfait universel."
+      />
+      <CapabilityList items={capabilities} />
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Comment choisir"
+        title="Le niveau de solution doit suivre le niveau de complexité."
+      />
+      <div class="choice-grid section-content">
+        {
+          choices.map((choice, index) => (
+            <Card>
+              <span class="choice-number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <h3>{choice.title}</h3>
+              <p>{choice.text}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Commencer simplement"
+          title="Vous n’avez pas besoin d’un cahier des charges parfait."
+          description="Vous pouvez commencer par nous expliquer simplement comment votre entreprise fonctionne aujourd’hui et où se trouvent les difficultés."
+        />
+        <ol class="start-steps">
+          {
+            startSteps.map(([title, text], index) => (
+              <li>
+                <>
+                  <span>0{index + 1}</span>
+                  <div>
+                    <>
+                      <h3>{title}</h3>
+                      <p>{text}</p>
+                    </>
+                  </div>
+                </>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Avant de commencer une discussion."
+      />
+      <div class="faq-list section-content">
+        {
+          faq.map(([question, answer]) => (
+            <details>
+              <>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </>
+            </details>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Prochaine étape"
+          title="Parlons du fonctionnement réel de votre entreprise."
+          description="Expliquez-nous vos opérations, vos difficultés et ce que vous souhaitez mieux contrôler. Nous vous aiderons à identifier la prochaine étape la plus raisonnable."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg">
+          Discuter sur WhatsApp<Icon slot="icon" name="external" />
+        </ButtonLink>
+        <a class="home-link" href="/#realisations"
+          >Voir les réalisations présentées sur l’accueil</a
+        >
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.solutions-hero) {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .hero-grid,
+  .editorial-split {
+    display: grid;
+    align-items: center;
+    gap: var(--space-2xl);
+  }
+
+  h1 {
+    max-width: 16ch;
+    margin: var(--space-lg) 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+  }
+
+  :global(.section-heading h2) {
+    font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+  }
+
+  .hero-lead,
+  .editorial-copy,
+  .choice-grid p,
+  .start-steps p,
+  .faq-list p {
+    color: var(--color-text-muted);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .concept {
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .concept > p {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .concept-flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.15fr);
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .concept-flow > div {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .concept-flow span,
+  .central {
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .central {
+    min-height: 8rem;
+    place-content: center;
+    background: var(--color-primary-soft);
+    color: var(--color-text);
+  }
+
+  .central :global(svg) {
+    margin-inline: auto;
+    color: var(--color-focus);
+  }
+
+  .signals-grid,
+  .start-steps {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .signals-grid,
+  .choice-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+
+  .services-list {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .editorial-split {
+    align-items: start;
+  }
+
+  .editorial-copy p:first-child {
+    margin-top: 0;
+  }
+
+  .editorial-copy strong {
+    color: var(--color-text);
+  }
+
+  .choice-number {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  .choice-grid h3 {
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  .choice-grid p {
+    margin-bottom: 0;
+  }
+
+  .start-steps {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .start-steps li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .start-steps > li > span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  .start-steps h3 {
+    margin-bottom: var(--space-xs);
+    font-size: 1.1rem;
+  }
+
+  .start-steps p {
+    margin: 0;
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  summary {
+    min-height: 3.5rem;
+    padding: var(--space-md) 2rem var(--space-md) 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  details p {
+    margin: 0;
+    padding: 0 0 var(--space-lg);
+  }
+
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .home-link {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 30rem) {
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .concept-flow {
+      grid-template-columns: 1fr;
+    }
+
+    .concept-flow > :global(svg) {
+      margin-inline: auto;
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (min-width: 42rem) {
+    .signals-grid,
+    .choice-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr);
+    }
+
+    .editorial-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choice-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 # Feuille de route
 
-Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3A fournit désormais la structure commerciale de l’accueil ; les validations de contenus restent nécessaires avant les pages internes et études de cas complètes.
+Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3B ajoute la page Solutions à la structure commerciale ; les validations de contenus restent nécessaires avant les autres pages internes et études de cas complètes.
 
 ## Phase 0 — Fondation
 
@@ -32,7 +32,7 @@ Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajust�
 ## Phase 3 — Pages principales
 
 - [x] Accueil ;
-- [ ] Solutions ;
+- [x] Solutions ;
 - [ ] Réalisations ;
 - [ ] Méthode ;
 - [ ] À propos ;

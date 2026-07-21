@@ -51,11 +51,13 @@ Chaque étude de cas devra contenir :
 
 Les informations confidentielles, données personnelles et interfaces non autorisées doivent être retirées ou anonymisées.
 
-## Navigation pendant la phase 3A
+## Navigation pendant la phase 3B
 
-La navigation publique mène aux sections réelles de la page d’accueil. Ce choix évite de publier des pages internes vides ou trompeuses. Les routes dédiées remplaceront progressivement ces ancres lorsque leur contenu aura été validé et développé.
+La navigation publique mène désormais à la route `/solutions/` pour les solutions. Les autres entrées internes continuent de pointer vers les sections réelles de la page d’accueil. Les routes dédiées remplaceront progressivement ces ancres lorsque leur contenu aura été validé et développé.
 
 Les quatre projets sont préparés dans la collection `projects`, mais leurs détails restent non publiés. La page d’accueil affiche uniquement les noms déjà retenus et signale explicitement que les études de cas sont en préparation.
+
+Les quatre catégories de solutions sont publiées depuis la collection `services`. Leur contenu reste générique et factuel : problème traité, bénéfices recherchés, exemples et type d’organisation concerné.
 
 ## Contenus à collecter
 

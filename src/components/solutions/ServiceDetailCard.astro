@@ -1,0 +1,150 @@
+---
+import Badge from "../common/Badge.astro";
+import ButtonLink from "../common/ButtonLink.astro";
+import Icon from "../common/Icon.astro";
+
+type IconName = "business" | "code" | "automation";
+
+interface Props {
+  index: number;
+  title: string;
+  summary: string;
+  problem: string;
+  benefits: string[];
+  examples: string[];
+  suitableFor: string;
+  icon: IconName;
+  href: string;
+  callToActionLabel?: string;
+}
+
+const {
+  index,
+  title,
+  summary,
+  problem,
+  benefits,
+  examples,
+  suitableFor,
+  icon,
+  href,
+  callToActionLabel = "Discuter de cette solution",
+} = Astro.props;
+---
+
+<article class="service-detail">
+  <div class="service-intro">
+    <div class="service-icon"><Icon name={icon} size={27} /></div>
+    <span class="service-number" aria-hidden="true"
+      >{String(index).padStart(2, "0")}</span
+    >
+    <h3>{title}</h3>
+    <p class="summary">{summary}</p>
+    <ButtonLink href={href} external variant="secondary">
+      {callToActionLabel}<Icon slot="icon" name="external" />
+    </ButtonLink>
+  </div>
+
+  <div class="service-details">
+    <div>
+      <Badge>Problème traité</Badge>
+      <p>{problem}</p>
+    </div>
+    <div class="detail-grid">
+      <div>
+        <h4>Bénéfices recherchés</h4>
+        <ul>{benefits.map((benefit) => <li>{benefit}</li>)}</ul>
+      </div>
+      <div>
+        <h4>Exemples</h4>
+        <ul>{examples.map((example) => <li>{example}</li>)}</ul>
+      </div>
+    </div>
+    <p class="suitable"><strong>Pour qui&nbsp;:</strong> {suitableFor}</p>
+  </div>
+</article>
+
+<style>
+  .service-detail {
+    display: grid;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .service-icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-soft);
+    color: var(--color-focus);
+  }
+
+  .service-number {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  h3 {
+    margin: var(--space-sm) 0;
+  }
+
+  .summary,
+  .service-details p,
+  li {
+    color: var(--color-text-muted);
+  }
+
+  .service-intro :global(.button-link) {
+    margin-top: var(--space-md);
+  }
+
+  .service-details > div:first-child p {
+    margin: var(--space-md) 0 0;
+  }
+
+  .detail-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  h4 {
+    margin: 0 0 var(--space-sm);
+    font-size: 0.95rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  li + li {
+    margin-top: var(--space-xs);
+  }
+
+  .suitable {
+    margin: var(--space-lg) 0 0;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .suitable strong {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 48rem) {
+    .service-detail {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

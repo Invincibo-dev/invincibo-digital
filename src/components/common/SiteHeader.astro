@@ -8,6 +8,10 @@ import ButtonLink from "./ButtonLink.astro";
 import Container from "./Container.astro";
 
 const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  const path = href.split("#")[0] || "/";
+  return pathname === path;
+};
 const whatsappUrl = createWhatsAppUrl(
   `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
 );
@@ -26,11 +30,7 @@ const whatsappUrl = createWhatsAppUrl(
             <li>
               <a
                 href={item.href}
-                aria-current={
-                  item.href === "/#accueil" && pathname === "/"
-                    ? "page"
-                    : undefined
-                }
+                aria-current={isActive(item.href) ? "page" : undefined}
               >
                 {item.label}
               </a>
@@ -57,7 +57,12 @@ const whatsappUrl = createWhatsAppUrl(
           {
             mainNavigation.map((item) => (
               <li>
-                <a href={item.href}>{item.label}</a>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
               </li>
             ))
           }
@@ -100,7 +105,7 @@ const whatsappUrl = createWhatsAppUrl(
     top: 0;
     z-index: 50;
     border-bottom: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+    background: var(--color-bg);
   }
 
   :global(.header-inner) {

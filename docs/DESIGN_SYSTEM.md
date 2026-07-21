@@ -51,7 +51,7 @@ La pile système commence par Inter si elle est déjà installée, puis utilise 
 
 Les composants propres à l’accueil utilisent ces fondations pour les problèmes, solutions, étapes, réalisations, aperçu conceptuel et présentation du fondateur. Les cadres réservés aux futurs visuels doivent rester explicitement identifiés jusqu’à l’ajout d’images autorisées.
 
-Le header utilise le token `--header-height`. Les navigations par ancre doivent employer `--anchor-offset`, appliqué globalement avec `scroll-padding-top` et `scroll-margin-top`, afin que les titres ciblés restent visibles sous le header sticky. Il ne faut pas définir de décalage différent dans chaque section.
+Le header utilise le token `--header-height` et un fond opaque afin que les contenus qui défilent derrière sa position sticky ne restent pas visibles à travers lui. Les navigations par ancre emploient `--anchor-offset`, appliqué une seule fois avec `scroll-padding-top` sur le document. Il ne faut pas dupliquer cet offset avec un `scroll-margin-top` identique ni définir un décalage différent dans chaque section.
 
 La page `/design-system/` présente ces éléments et porte une directive `noindex, nofollow`.
 

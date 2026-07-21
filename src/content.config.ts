@@ -24,9 +24,16 @@ const services = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/services" }),
   schema: z.object({
     title: z.string(),
+    slug: z.string(),
     summary: z.string(),
     order: z.number().int().nonnegative(),
     published: z.boolean().default(false),
+    icon: z.enum(["business", "code", "automation"]),
+    problem: z.string(),
+    benefits: z.array(z.string()).min(1),
+    examples: z.array(z.string()).min(1),
+    suitableFor: z.string(),
+    callToActionLabel: z.string().optional(),
   }),
 });
 

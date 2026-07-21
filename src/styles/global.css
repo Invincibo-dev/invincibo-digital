@@ -168,10 +168,6 @@ textarea {
   outline-offset: 3px;
 }
 
-:where(main[id], section[id]) {
-  scroll-margin-top: var(--anchor-offset);
-}
-
 .skip-link {
   position: fixed;
   top: var(--space-sm);
