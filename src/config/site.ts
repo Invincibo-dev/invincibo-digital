@@ -8,12 +8,19 @@ export const siteConfig = {
   slogan: "Des logiciels conçus pour faire avancer votre entreprise.",
   domain: "https://invincibodigital.com",
   domainIsProvisional: true,
+  environment: "development",
   locale: "fr-HT",
   language: "fr",
+  legalStatus: null,
+  legalAddress: null,
   phone: "+50936896407",
   whatsapp: "50936896407",
   email: null,
   socialLinks: {},
+  assets: {
+    favicon: "/favicon.svg",
+    openGraphImage: null,
+  },
   founder: {
     name: "Laveniel Séjour",
     role: "Entrepreneur et développeur de solutions numériques",
@@ -30,6 +37,20 @@ export const siteConfig = {
     },
   },
 } as const;
+
+export const publicRoutes = [
+  "/",
+  "/solutions/",
+  "/realisations/",
+  "/methode/",
+  "/a-propos/",
+  "/contact/",
+] as const;
+
+export const provisionalLegalRoutes = [
+  "/politique-confidentialite/",
+  "/mentions-legales/",
+] as const;
 
 export const mainNavigation = [
   { label: "Accueil", href: "/#accueil" },

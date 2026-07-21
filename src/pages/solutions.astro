@@ -12,6 +12,7 @@ import NeedSignal from "../components/solutions/NeedSignal.astro";
 import ServiceDetailCard from "../components/solutions/ServiceDetailCard.astro";
 import { createWhatsAppUrl, siteConfig } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { StructuredDataNode } from "../utils/structured-data";
 
 const services = (
   await getCollection("services", ({ data }) => data.published)
@@ -101,12 +102,29 @@ const faq = [
     "Elle commence par la compréhension du besoin et du périmètre. Une estimation sérieuse dépend des fonctions, des contraintes, des intégrations et du niveau de qualité attendu.",
   ],
 ] as const;
+
+const solutionStructuredData = services.map((service) => ({
+  "@type": "Service",
+  name: service.data.title,
+  description: service.data.summary,
+  provider: {
+    "@type": "Organization",
+    "@id": `${siteConfig.domain}/#organization`,
+    name: siteConfig.name,
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Haïti",
+  },
+  url: `${siteConfig.domain}/solutions/`,
+})) satisfies StructuredDataNode[];
 ---
 
 <BaseLayout
   title="Solutions logicielles pour entreprises"
-  description="Logiciels de gestion, applications métier, automatisations et modernisation de systèmes pour aider les entreprises à mieux organiser et contrôler leurs opérations."
+  description="Découvrez nos logiciels de gestion, applications métier, automatisations et modernisations pour mieux organiser les opérations des entreprises."
   canonical={`${siteConfig.domain}/solutions/`}
+  structuredData={solutionStructuredData}
 >
   <Section class="solutions-hero">
     <Container>

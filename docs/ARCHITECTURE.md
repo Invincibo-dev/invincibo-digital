@@ -71,6 +71,8 @@ Cet extrait est seulement un exemple d’architecture : `src/config/site.ts` ne 
 
 Chaque page devra disposer d’un titre et d’une description uniques, d’une URL canonique, de métadonnées Open Graph et, lorsque pertinent, de données structurées véridiques. Un composant ou layout commun devra garantir la cohérence. La phase technique prévoira également un sitemap, un fichier robots et la langue `fr-HT`.
 
+La mise en œuvre actuelle centralise ces métadonnées dans `BaseLayout`. Les endpoints statiques `/sitemap.xml` et `/robots.txt` utilisent `siteConfig` afin de rester cohérents avec le domaine et son statut provisoire. Le script `scripts/validate-production.mjs` contrôle les prérequis stricts sans bloquer le build local.
+
 ## Images
 
 Les images seront classées par marque, projet et fondateur. Seuls les fichiers autorisés seront publiés. Les formats modernes, dimensions adaptées, textes alternatifs utiles et chargement différé limiteront le poids des pages. Les captures devront masquer les informations confidentielles et personnelles.

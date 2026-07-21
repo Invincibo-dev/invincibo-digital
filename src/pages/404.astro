@@ -1,0 +1,68 @@
+---
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Container from "../components/common/Container.astro";
+import Section from "../components/common/Section.astro";
+import { siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page introuvable"
+  description="La page demandée n’existe pas ou a été déplacée."
+  canonical={`${siteConfig.domain}/404.html`}
+  noindex
+>
+  <Section class="not-found">
+    <Container>
+      <div class="content">
+        <p class="code">Erreur 404</p>
+        <h1>Cette page est introuvable.</h1>
+        <p>
+          Le lien utilisé est peut-être incorrect ou la page a été déplacée.
+          Vous pouvez revenir à l’accueil ou nous présenter votre besoin.
+        </p>
+        <div class="actions">
+          <ButtonLink href="/">Revenir à l’accueil</ButtonLink>
+          <ButtonLink href="/contact/" variant="secondary"
+            >Nous contacter</ButtonLink
+          >
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.not-found) {
+    display: grid;
+    min-height: 60vh;
+    align-items: center;
+  }
+  .content {
+    max-width: 44rem;
+  }
+  .code {
+    color: var(--color-focus);
+    font-weight: 800;
+  }
+  h1 {
+    margin-block: var(--space-md);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+  }
+  .content > p:not(.code) {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+  }
+  @media (max-width: 30rem) {
+    .actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

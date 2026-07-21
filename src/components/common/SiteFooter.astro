@@ -38,6 +38,13 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
         >
         <a href={`tel:${siteConfig.phone}`}>{displayPhone}</a>
       </div>
+      <nav aria-label="Informations légales">
+        <h2>Informations</h2>
+        <ul>
+          <li><a href="/politique-confidentialite/">Confidentialité</a></li>
+          <li><a href="/mentions-legales/">Mentions légales</a></li>
+        </ul>
+      </nav>
     </div>
     <div class="footer-bottom">
       <p>© {year} {siteConfig.name}. Droits réservés.</p>
@@ -108,7 +115,7 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
 
   @media (min-width: 48rem) {
     .footer-grid {
-      grid-template-columns: minmax(0, 2fr) repeat(2, minmax(10rem, 1fr));
+      grid-template-columns: minmax(0, 1.75fr) repeat(3, minmax(9rem, 1fr));
     }
   }
 </style>

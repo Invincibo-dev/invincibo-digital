@@ -1,0 +1,116 @@
+---
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Container from "../components/common/Container.astro";
+import Section from "../components/common/Section.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contactUrl = createWhatsAppUrl(siteConfig.contact.messages.generic);
+---
+
+<BaseLayout
+  title="Politique de confidentialité"
+  description="Informations provisoires sur le traitement des données lors de la consultation du site Invincibo Digital et des échanges via WhatsApp."
+  canonical={`${siteConfig.domain}/politique-confidentialite/`}
+  noindex
+>
+  <Section class="legal-page">
+    <Container>
+      <article>
+        <p class="status">
+          Document provisoire — à compléter avant la production officielle
+        </p>
+        <h1>Politique de confidentialité</h1>
+        <p class="lead">
+          Cette page décrit honnêtement le fonctionnement actuel du site. Elle
+          devra être révisée si de nouveaux services de collecte ou de mesure
+          sont ajoutés.
+        </p>
+
+        <h2>Données collectées directement par le site</h2>
+        <p>
+          Le site actuel ne propose aucun formulaire connecté, aucun compte
+          utilisateur et aucun système d’analytics. Il ne collecte donc pas
+          directement de données personnelles dans un backend exploité par
+          Invincibo Digital.
+        </p>
+
+        <h2>Cookies et ressources</h2>
+        <p>
+          Aucun cookie publicitaire ou outil de suivi tiers n’est actuellement
+          intégré. Les ressources visuelles, les styles et les scripts
+          nécessaires au site sont servis localement.
+        </p>
+
+        <h2>Échanges via WhatsApp</h2>
+        <p>
+          Les boutons de contact redirigent vers WhatsApp, un service externe.
+          Les informations envoyées par ce canal sont soumises aux conditions
+          d’utilisation et à la politique de confidentialité de WhatsApp.
+        </p>
+        <p>
+          Dans un premier message, ne transmettez pas de mot de passe, de clé
+          API, de données clients complètes ou d’informations financières
+          sensibles.
+        </p>
+
+        <h2>Éléments confidentiels</h2>
+        <p>
+          Le contexte général peut être partagé pour comprendre le besoin. Les
+          éléments confidentiels doivent être échangés uniquement dans un cadre
+          approprié au projet, sans promesse juridique absolue formulée par
+          cette page provisoire.
+        </p>
+
+        <h2>Évolution de cette politique</h2>
+        <p>
+          Cette politique devra être mise à jour avant l’ajout d’un formulaire,
+          d’analytics, d’un service externe supplémentaire ou de toute nouvelle
+          collecte directe.
+        </p>
+
+        <h2>Contact actuel</h2>
+        <p>
+          Aucun email légal n’est encore validé. Le canal public actuellement
+          disponible est WhatsApp.
+        </p>
+        <ButtonLink href={contactUrl} external
+          >Contacter via WhatsApp</ButtonLink
+        >
+      </article>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.legal-page) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+  article {
+    max-width: 48rem;
+  }
+  h1 {
+    margin-block: var(--space-lg);
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+  }
+  h2 {
+    margin: var(--space-2xl) 0 var(--space-md);
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+  }
+  .status {
+    width: fit-content;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--radius-md);
+    color: var(--color-warning);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+  .lead,
+  article > p {
+    color: var(--color-text-muted);
+  }
+  .lead {
+    font-size: 1.1rem;
+  }
+</style>

@@ -15,6 +15,7 @@ import SolutionCard from "../components/home/SolutionCard.astro";
 import ProjectPreviewCard from "../components/projects/ProjectPreviewCard.astro";
 import { createWhatsAppUrl, siteConfig } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { StructuredDataNode } from "../utils/structured-data";
 
 const projects = (
   await getCollection(
@@ -114,6 +115,35 @@ const reasons = [
   "Accompagnement après la livraison",
   "Échanges possibles en français et en créole",
 ] as const;
+
+const homepageStructuredData = [
+  {
+    "@type": "WebSite",
+    "@id": `${siteConfig.domain}/#website`,
+    url: siteConfig.domain,
+    name: siteConfig.name,
+    inLanguage: siteConfig.locale,
+    publisher: { "@id": `${siteConfig.domain}/#organization` },
+  },
+  {
+    "@type": "Organization",
+    "@id": `${siteConfig.domain}/#organization`,
+    name: siteConfig.name,
+    alternateName: "Invincibo",
+    url: siteConfig.domain,
+    description: siteConfig.description,
+    founder: {
+      "@type": "Person",
+      name: siteConfig.founder.name,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: siteConfig.phone,
+      contactType: "customer service",
+      availableLanguage: ["fr", "ht"],
+    },
+  },
+] satisfies StructuredDataNode[];
 ---
 
 <BaseLayout
@@ -121,6 +151,7 @@ const reasons = [
   title={siteConfig.name}
   description="Invincibo Digital transforme les opérations dispersées et manuelles en systèmes numériques clairs, fiables et contrôlables."
   canonical={siteConfig.domain}
+  structuredData={homepageStructuredData}
 >
   <Section id="accueil" class="hero">
     <Container>

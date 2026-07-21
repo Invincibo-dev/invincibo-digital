@@ -4,6 +4,8 @@
 
 Tous les contenus doivent parler d’abord des problèmes commerciaux, des solutions apportées et des résultats ou bénéfices vérifiables. Les technologies restent secondaires. Aucun résultat chiffré, témoignage ou fait commercial ne doit être inventé.
 
+La marque utilise « nous » lorsqu’Invincibo Digital parle comme activité. « Je » est réservé aux passages clairement attribués à Laveniel Séjour. Cette règle évite de suggérer une équipe ou une structure juridique non validée.
+
 ## Pages prévues
 
 - Accueil ;
@@ -15,6 +17,8 @@ Tous les contenus doivent parler d’abord des problèmes commerciaux, des solut
 - Contact ;
 - Politique de confidentialité ;
 - Mentions légales.
+
+La politique de confidentialité et les mentions légales restent provisoires et en `noindex` tant que les informations nécessaires à une publication officielle ne sont pas validées.
 
 ## Structure de l’accueil
 

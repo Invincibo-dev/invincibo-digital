@@ -8,7 +8,7 @@ Slogan provisoire : « Des logiciels conçus pour faire avancer votre entreprise
 
 ## Statut
 
-**Phase 3F — Page Contact.** La fondation technique, le design system, la page d’accueil commerciale et les pages Solutions, Réalisations, Méthode, À propos et Contact sont en place. Les études de cas détaillées et les pages légales ne sont pas encore développées.
+**Phase 4A — Préparation production.** Les six pages commerciales, les routes techniques et les documents provisoires de préparation sont en place. Le déploiement reste volontairement bloqué tant que le domaine, les informations légales et les assets officiels ne sont pas validés.
 
 État des principaux jalons :
 
@@ -20,6 +20,7 @@ Slogan provisoire : « Des logiciels conçus pour faire avancer votre entreprise
 - page Méthode initiale terminée ;
 - page À propos initiale terminée ;
 - page Contact initiale terminée, sans formulaire connecté ;
+- préparation SEO, sitemap, robots, 404 et pages légales provisoires en place ;
 - autres pages internes et contenus détaillés restant à développer.
 
 Le nom, le domaine `invincibodigital.com`, l’identité visuelle et certaines informations commerciales restent provisoires jusqu’à validation.
@@ -40,15 +41,16 @@ Le serveur de développement indique l’adresse locale à ouvrir dans le naviga
 
 ## Commandes
 
-| Commande               | Usage                                            |
-| ---------------------- | ------------------------------------------------ |
-| `npm run dev`          | Démarrer le serveur de développement             |
-| `npm run build`        | Générer le site de production dans `dist/`       |
-| `npm run preview`      | Prévisualiser le build localement                |
-| `npm run check`        | Vérifier Astro et TypeScript                     |
-| `npm run lint`         | Analyser la qualité du code                      |
-| `npm run format`       | Formater les fichiers pris en charge             |
-| `npm run format:check` | Vérifier le formatage sans modifier les fichiers |
+| Commande                      | Usage                                                        |
+| ----------------------------- | ------------------------------------------------------------ |
+| `npm run dev`                 | Démarrer le serveur de développement                         |
+| `npm run build`               | Générer le site de production dans `dist/`                   |
+| `npm run preview`             | Prévisualiser le build localement                            |
+| `npm run check`               | Vérifier Astro et TypeScript                                 |
+| `npm run lint`                | Analyser la qualité du code                                  |
+| `npm run format`              | Formater les fichiers pris en charge                         |
+| `npm run format:check`        | Vérifier le formatage sans modifier les fichiers             |
+| `npm run validate:production` | Refuser une production dont les prérequis restent incomplets |
 
 ## Architecture
 
@@ -77,5 +79,8 @@ Le nom, le domaine, le téléphone, WhatsApp et les autres informations publique
 - [Page Méthode](docs/METHOD_PAGE.md)
 - [Page À propos](docs/ABOUT_PAGE.md)
 - [Page Contact](docs/CONTACT_PAGE.md)
+- [Préparation production](docs/PRODUCTION_READINESS.md)
+- [Stratégie SEO commerciale](docs/SEO_STRATEGY.md)
+- [En-têtes de sécurité](docs/SECURITY_HEADERS.md)
 - [Feuille de route](docs/ROADMAP.md)
 - [Règles pour les agents](AGENTS.md)

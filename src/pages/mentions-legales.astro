@@ -1,0 +1,120 @@
+---
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Container from "../components/common/Container.astro";
+import Section from "../components/common/Section.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contactUrl = createWhatsAppUrl(siteConfig.contact.messages.generic);
+---
+
+<BaseLayout
+  title="Mentions légales"
+  description="Informations légales provisoires concernant le site Invincibo Digital."
+  canonical={`${siteConfig.domain}/mentions-legales/`}
+  noindex
+>
+  <Section class="legal-page">
+    <Container>
+      <article>
+        <p class="status">Document incomplet — noindex jusqu’à validation</p>
+        <h1>Mentions légales</h1>
+        <p class="lead">
+          Certaines informations légales nécessaires à une publication
+          officielle ne sont pas encore validées. Cette page ne prétend pas
+          constituer des mentions légales définitives.
+        </p>
+
+        <h2>Site</h2>
+        <dl>
+          <div><dt>Nom public</dt><dd>{siteConfig.name}</dd></div>
+          <div>
+            <dt>Activité présentée</dt><dd>
+              Conception de solutions numériques
+            </dd>
+          </div>
+          <div>
+            <dt>Édition du contenu</dt><dd>{siteConfig.founder.name}</dd>
+          </div>
+          <div>
+            <dt>Domaine envisagé</dt><dd>{siteConfig.domain} — provisoire</dd>
+          </div>
+        </dl>
+
+        <h2>Informations restant à valider</h2>
+        <p>
+          Le nom légal, le statut juridique, l’adresse, les identifiants
+          d’enregistrement, l’email légal et l’hébergeur final ne sont pas
+          encore confirmés. Ils devront être ajoutés avant la mise en production
+          officielle lorsque leur publication est requise.
+        </p>
+
+        <h2>Contact public</h2>
+        <p>
+          Le canal public actuellement validé est WhatsApp. Aucun email ou
+          adresse physique n’est présenté tant que ces informations ne sont pas
+          confirmées.
+        </p>
+        <ButtonLink href={contactUrl} external
+          >Contacter via WhatsApp</ButtonLink
+        >
+      </article>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.legal-page) {
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+  article {
+    max-width: 48rem;
+  }
+  h1 {
+    margin-block: var(--space-lg);
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+  }
+  h2 {
+    margin: var(--space-2xl) 0 var(--space-md);
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+  }
+  .status {
+    width: fit-content;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--radius-md);
+    color: var(--color-warning);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+  .lead,
+  article > p,
+  dd {
+    color: var(--color-text-muted);
+  }
+  .lead {
+    font-size: 1.1rem;
+  }
+  dl {
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  dl div {
+    display: grid;
+    gap: var(--space-xs);
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  dt {
+    font-weight: 700;
+  }
+  dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 36rem) {
+    dl div {
+      grid-template-columns: 12rem minmax(0, 1fr);
+    }
+  }
+</style>

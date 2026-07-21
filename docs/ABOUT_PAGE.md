@@ -36,7 +36,7 @@ Le hero propose « Discuter de mon projet » via une URL WhatsApp produite par `
 
 ## Photo
 
-Aucune photo n’est intégrée sans validation explicite. La section fondateur utilise une carte profil compacte avec les initiales dérivées du nom centralisé et la mention « Portrait officiel à venir ». Un futur fichier validé pourra être placé dans `public/images/founder/`, sans ajouter entre-temps d’image vide, factice ou générée.
+Aucune photo n’est intégrée sans validation explicite. La section fondateur utilise une carte profil compacte avec les initiales dérivées du nom centralisé, sans placeholder public. Un futur fichier validé pourra être ajouté dans un dossier d’images dédié, sans créer entre-temps d’image vide, factice ou générée.
 
 ## Informations provisoires
 

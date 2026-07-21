@@ -53,8 +53,8 @@ Chaque publication dépendra de contenus vérifiés et des autorisations nécess
 
 - [x] intégrer les appels à l’action WhatsApp ;
 - [ ] mettre en place le formulaire ;
-- [ ] finaliser les métadonnées et Open Graph ;
-- [ ] générer le sitemap ;
+- [x] centraliser les métadonnées et Open Graph textuel ;
+- [x] générer le sitemap des pages commerciales ;
 - [ ] choisir une solution d’analytics respectueuse de la confidentialité ;
 - [ ] définir et mesurer les conversions utiles.
 
@@ -68,3 +68,7 @@ Chaque publication dépendra de contenus vérifiés et des autorisations nécess
 - [ ] effectuer les vérifications de sécurité ;
 - [ ] déployer sur la plateforme validée ;
 - [ ] documenter la production et la maintenance.
+
+La préparation technique initiale est réalisée : robots, 404, favicon provisoire, pages légales provisoires, garde-fou de production et recommandations de sécurité. La validation stricte reste bloquée par le domaine provisoire, les informations légales et l’image Open Graph absente.
+
+Une phase SEO commerciale ultérieure devra construire les pages de service géographiques définies dans `SEO_STRATEGY.md`, après validation de chaque offre afin d’éviter la cannibalisation et le contenu artificiel.

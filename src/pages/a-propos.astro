@@ -7,6 +7,7 @@ import Section from "../components/common/Section.astro";
 import SectionHeading from "../components/common/SectionHeading.astro";
 import { createWhatsAppUrl, siteConfig } from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { StructuredDataNode } from "../utils/structured-data";
 
 const whatsappUrl = createWhatsAppUrl(
   `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
@@ -61,12 +62,36 @@ const boundaries = [
   "Aucune solution sur mesure recommandée sans analyse",
   "Aucune publication de données client sans validation",
 ] as const;
+
+const aboutStructuredData = [
+  {
+    "@type": "ProfilePage",
+    "@id": `${siteConfig.domain}/a-propos/#profile`,
+    url: `${siteConfig.domain}/a-propos/`,
+    name: `À propos de ${siteConfig.founder.name}`,
+    mainEntity: { "@id": `${siteConfig.domain}/#founder` },
+  },
+  {
+    "@type": "Person",
+    "@id": `${siteConfig.domain}/#founder`,
+    name: siteConfig.founder.name,
+    jobTitle: siteConfig.founder.role,
+    description: siteConfig.founder.shortBio,
+    worksFor: {
+      "@type": "Organization",
+      "@id": `${siteConfig.domain}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.domain,
+    },
+  },
+] satisfies StructuredDataNode[];
 ---
 
 <BaseLayout
-  title="À propos"
-  description="Découvrez Laveniel Séjour, entrepreneur et développeur de solutions numériques, ainsi que l’approche d’Invincibo Digital pour concevoir des logiciels adaptés aux réalités des entreprises."
+  title="Laveniel Séjour — À propos"
+  description="Découvrez Laveniel Séjour, entrepreneur et développeur de solutions numériques en Haïti, ainsi que l’approche d’Invincibo Digital."
   canonical={`${siteConfig.domain}/a-propos/`}
+  structuredData={aboutStructuredData}
 >
   <Section class="about-hero">
     <Container>
@@ -108,7 +133,6 @@ const boundaries = [
             <div class="profile-copy">
               <p class="profile-name">{siteConfig.founder.name}</p>
               <p class="profile-role">{siteConfig.founder.role}</p>
-              <p class="profile-note">Portrait officiel à venir</p>
             </div>
           </div>
         </div>
@@ -124,6 +148,11 @@ const boundaries = [
             construction de systèmes de gestion m’ont appris à partir des usages
             réels. Cette approche donne une place centrale à la clarté, au suivi
             et à la traçabilité.
+          </p>
+          <p>
+            Cette manière de travailler tient compte des réalités
+            opérationnelles rencontrées par les petites entreprises en Haïti,
+            sans imposer une réponse identique à chaque activité.
           </p>
         </div>
       </div>
@@ -362,11 +391,6 @@ const boundaries = [
   .profile-role {
     color: var(--color-text-muted);
     font-size: 0.95rem;
-  }
-  .profile-note {
-    margin-top: var(--space-xs) !important;
-    color: var(--color-text-muted);
-    font-size: 0.8rem;
   }
   .editorial-split,
   .working-grid {

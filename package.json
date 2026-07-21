@@ -10,7 +10,8 @@
     "check": "astro check",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "validate:production": "node scripts/validate-production.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

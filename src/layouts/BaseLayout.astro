@@ -3,6 +3,11 @@ import "../styles/global.css";
 import { siteConfig } from "../config/site";
 import SiteFooter from "../components/common/SiteFooter.astro";
 import SiteHeader from "../components/common/SiteHeader.astro";
+import {
+  createBreadcrumbList,
+  serializeStructuredData,
+  type StructuredDataNode,
+} from "../utils/structured-data";
 
 interface Props {
   title?: string;
@@ -13,6 +18,7 @@ interface Props {
   showFooter?: boolean;
   canonical?: string;
   openGraphImage?: string;
+  structuredData?: StructuredDataNode | StructuredDataNode[];
 }
 
 const {
@@ -24,10 +30,27 @@ const {
   showFooter = true,
   canonical,
   openGraphImage,
+  structuredData,
 } = Astro.props;
 const documentTitle = home
   ? (title ?? siteConfig.name)
   : `${title ?? siteConfig.name} | ${siteConfig.name}`;
+const canonicalUrl = canonical ?? `${siteConfig.domain}${Astro.url.pathname}`;
+const resolvedOpenGraphImage =
+  openGraphImage ?? siteConfig.assets.openGraphImage;
+const structuredNodes = structuredData
+  ? Array.isArray(structuredData)
+    ? [...structuredData]
+    : [structuredData]
+  : [];
+
+if (!home && !noindex && title) {
+  structuredNodes.unshift(
+    createBreadcrumbList(siteConfig.domain, canonicalUrl, title),
+  );
+}
+
+const structuredGraph = serializeStructuredData(structuredNodes);
 ---
 
 <!doctype html>
@@ -37,14 +60,31 @@ const documentTitle = home
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href={siteConfig.assets.favicon} type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={siteConfig.locale.replace("-", "_")} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={description} />
-    {canonical && <meta property="og:url" content={canonical} />}
-    {openGraphImage && <meta property="og:image" content={openGraphImage} />}
+    <meta property="og:url" content={canonicalUrl} />
+    {
+      resolvedOpenGraphImage && (
+        <>
+          <meta property="og:image" content={resolvedOpenGraphImage} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
+    {
+      structuredGraph && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={structuredGraph}
+        />
+      )
+    }
     <title>{documentTitle}</title>
   </head>
   <body>
