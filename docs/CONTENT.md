@@ -51,9 +51,9 @@ Chaque étude de cas devra contenir :
 
 Les informations confidentielles, données personnelles et interfaces non autorisées doivent être retirées ou anonymisées.
 
-## Navigation pendant la phase 3E
+## Navigation pendant la phase 3F
 
-La navigation publique mène aux routes `/solutions/`, `/realisations/`, `/methode/` et `/a-propos/`. L’entrée Contact continue de pointer vers la section réelle de la page d’accueil. Sa route dédiée remplacera cette ancre lorsque son contenu aura été validé et développé.
+La navigation publique mène aux routes `/solutions/`, `/realisations/`, `/methode/`, `/a-propos/` et `/contact/`. L’ancre `#contact` reste présente sur l’accueil pour son CTA local, mais la navigation principale et le pied de page utilisent la route Contact dédiée.
 
 Les quatre projets sont publiés sous une forme anonymisée depuis la collection `projects`. La page d’accueil et le catalogue n’affichent que les entrées publiées dont la visibilité n’est pas `private`. Les titres internes, clients, données et détails non autorisés restent absents du rendu public. Les études de cas détaillées restent en préparation.
 

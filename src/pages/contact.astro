@@ -1,0 +1,625 @@
+---
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import {
+  createWhatsAppUrl,
+  formatPhoneForDisplay,
+  siteConfig,
+} from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const whatsappUrl = createWhatsAppUrl(siteConfig.contact.messages.project);
+const displayPhone = formatPhoneForDisplay(siteConfig.phone);
+
+const preparationItems = [
+  "Type d’activité",
+  "Opérations actuelles",
+  "Problème principal",
+  "Personnes concernées",
+  "Outils déjà utilisés",
+  "Résultat recherché",
+  "Priorité du projet",
+] as const;
+
+const topics = [
+  {
+    title: "Logiciel de gestion",
+    description:
+      "Pour centraliser clients, ventes, stock, paiements ou opérations.",
+    message:
+      "Bonjour Invincibo Digital, je souhaite discuter d’un logiciel de gestion pour mon entreprise.",
+  },
+  {
+    title: "Application métier",
+    description:
+      "Pour appliquer les règles spécifiques d’une activité dans un outil adapté.",
+    message:
+      "Bonjour Invincibo Digital, je souhaite discuter d’une application métier adaptée à mon activité.",
+  },
+  {
+    title: "Automatisation",
+    description:
+      "Pour réduire des tâches répétitives ou mieux connecter certains processus.",
+    message:
+      "Bonjour Invincibo Digital, je souhaite discuter d’une automatisation pour certains processus de mon entreprise.",
+  },
+  {
+    title: "Amélioration d’un système existant",
+    description:
+      "Pour corriger, moderniser ou faire évoluer un outil déjà utilisé.",
+    message:
+      "Bonjour Invincibo Digital, je souhaite discuter de l’amélioration d’un système que nous utilisons déjà.",
+  },
+] as const;
+
+const nextSteps = [
+  ["Lecture du besoin", "Nous prenons connaissance du contexte partagé."],
+  [
+    "Questions de clarification",
+    "Nous précisons les opérations, les priorités et les contraintes utiles.",
+  ],
+  [
+    "Orientation initiale",
+    "Nous identifions les pistes qui méritent d’être étudiées.",
+  ],
+  [
+    "Prochaine étape",
+    "Si le besoin est pertinent, nous proposons une suite raisonnable à la discussion.",
+  ],
+] as const;
+
+const safetyItems = [
+  "Ne transmettez aucun mot de passe.",
+  "N’envoyez aucune clé API ou autre accès technique.",
+  "Évitez les fichiers contenant des données clients complètes.",
+  "Ne partagez pas d’informations financières sensibles dans le premier message.",
+] as const;
+
+const faq = [
+  [
+    "Dois-je déjà connaître la solution technique ?",
+    "Non. Commencez par décrire votre fonctionnement et le problème rencontré.",
+  ],
+  [
+    "Puis-je simplement expliquer mon problème ?",
+    "Oui. Un message concret suffit pour commencer à clarifier le besoin.",
+  ],
+  [
+    "Est-ce que tous les projets sont acceptés ?",
+    "Non. La pertinence, le périmètre et les conditions du projet doivent d’abord être examinés.",
+  ],
+  [
+    "Puis-je demander une amélioration d’un système existant ?",
+    "Oui. Décrivez l’outil actuel, ses limites et l’amélioration recherchée, sans envoyer d’accès sensible.",
+  ],
+  [
+    "Que ne dois-je pas envoyer dans le premier message ?",
+    "N’envoyez pas de mots de passe, clés API, données clients complètes ou informations financières sensibles.",
+  ],
+] as const;
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contactez Invincibo Digital pour discuter d’un logiciel de gestion, d’une application métier, d’une automatisation ou de l’amélioration d’un système existant."
+  canonical={`${siteConfig.domain}/contact/`}
+>
+  <Section class="contact-hero">
+    <Container>
+      <div class="hero-grid">
+        <div>
+          <Badge variant="primary">Contact</Badge>
+          <h1>Parlons du fonctionnement réel de votre entreprise.</h1>
+          <p class="hero-lead">
+            Présentez-nous votre activité, les opérations qui vous posent
+            problème et ce que vous souhaitez mieux organiser.
+          </p>
+          <div class="hero-actions">
+            <ButtonLink href={whatsappUrl} external size="lg"
+              >Discuter de mon projet<Icon
+                slot="icon"
+                name="external"
+              /></ButtonLink
+            >
+            <ButtonLink href="/methode/" variant="secondary" size="lg"
+              >Découvrir notre méthode<Icon
+                slot="icon"
+                name="arrow-right"
+              /></ButtonLink
+            >
+          </div>
+        </div>
+        <div class="contact-flow" aria-label="Chemin d’un premier échange">
+          <p>Aperçu du premier échange</p>
+          <ol>
+            {
+              ["Activité", "Difficulté", "Besoin", "Prochaine étape"].map(
+                (item, index) => (
+                  <li>
+                    <>
+                      <span>0{index + 1}</span>
+                      <strong>{item}</strong>
+                    </>
+                  </li>
+                ),
+              )
+            }
+          </ol>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Avant d’écrire"
+          title="Vous n’avez pas besoin d’un cahier des charges complet."
+          description="Un message simple et concret suffit pour commencer."
+        />
+        <ul class="preparation-list">
+          {
+            preparationItems.map((item) => (
+              <li>
+                <>
+                  <Icon name="check" size={19} />
+                  <span>{item}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <SectionHeading
+        eyebrow="Votre sujet"
+        title="Choisir le point de départ de la discussion."
+        description="Ces catégories orientent le premier message sans présumer de la solution finale."
+      />
+      <div class="topic-grid section-content">
+        {
+          topics.map((topic) => (
+            <Card class="topic-card">
+              <>
+                <h3>{topic.title}</h3>
+                <p>{topic.description}</p>
+                <ButtonLink
+                  href={createWhatsAppUrl(topic.message)}
+                  external
+                  variant="secondary"
+                >
+                  Discuter de ce sujet
+                  <Icon slot="icon" name="external" />
+                </ButtonLink>
+              </>
+            </Card>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="message-grid">
+        <SectionHeading
+          eyebrow="Exemple, pas formulaire"
+          title="Un bon premier message peut tenir en quelques lignes."
+          description="Vous pouvez adapter librement cet exemple. Il n’est pas nécessaire de le remplir parfaitement."
+        />
+        <figure class="message-guide">
+          <figcaption>Exemple de premier message</figcaption>
+          <blockquote>
+            Bonjour Invincibo Digital,<br /><br />Je dirige une activité de
+            <mark>[type d’activité]</mark>.<br />Aujourd’hui, nous utilisons
+            <mark>[outils ou méthode]</mark>.<br />Notre principale difficulté
+            est
+            <mark>[problème]</mark>.<br />Nous souhaitons mieux
+            <mark>[objectif]</mark>.<br /><br />Je voudrais savoir quelle
+            prochaine étape serait raisonnable.
+          </blockquote>
+        </figure>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <SectionHeading
+        eyebrow="Après le message"
+        title="Ce qui se passe ensuite."
+        description="Tous les projets ne nécessitent pas forcément un développement sur mesure."
+      />
+      <ol class="step-list section-content">
+        {
+          nextSteps.map(([title, description], index) => (
+            <li>
+              <>
+                <span>0{index + 1}</span>
+                <div>
+                  <>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </>
+                </div>
+              </>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="safety-panel">
+        <SectionHeading
+          eyebrow="Confidentialité"
+          title="Partagez le contexte, pas les données sensibles."
+          description="Un premier échange doit permettre de comprendre le besoin sans exposer les opérations sensibles de votre entreprise."
+        />
+        <div>
+          <ul class="safety-list">
+            {
+              safetyItems.map((item) => (
+                <li>
+                  <>
+                    <Icon name="check" size={19} />
+                    <span>{item}</span>
+                  </>
+                </li>
+              ))
+            }
+          </ul><p>
+            Les éléments confidentiels doivent être échangés seulement dans un
+            cadre approprié, défini selon le projet.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="channel-grid">
+        <SectionHeading
+          eyebrow="Canal public"
+          title="Un point de contact clair."
+          description="Les autres canaux seront ajoutés uniquement après validation."
+        />
+        <Card class="channel-card"
+          ><Badge variant="success">Canal disponible</Badge><h3>
+            {siteConfig.contact.whatsappLabel}
+          </h3><a class="phone" href={`tel:${siteConfig.phone}`}
+            >{displayPhone}</a
+          ><p>Le numéro ouvre directement votre application d’appel.</p></Card
+        >
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Avant votre premier message."
+      />
+      <div class="faq-list section-content">
+        {
+          faq.map(([question, answer]) => (
+            <details>
+              <>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </>
+            </details>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Commencer simplement"
+          title="Commencez par expliquer ce qui vous ralentit aujourd’hui."
+          description="Nous vous aiderons à déterminer si la prochaine étape raisonnable est un meilleur outil, une automatisation, une amélioration ou un développement sur mesure."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg"
+          >Discuter sur WhatsApp<Icon slot="icon" name="external" /></ButtonLink
+        >
+        <div class="related-links">
+          <a href="/solutions/">Découvrir nos solutions</a><a
+            href="/realisations/">Voir nos réalisations</a
+          >
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.contact-hero) {
+    padding-block: clamp(2rem, 5vw, 4rem);
+  }
+  .hero-grid,
+  .editorial-split,
+  .message-grid,
+  .safety-panel,
+  .channel-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  h1 {
+    max-width: 16ch;
+    margin: var(--space-lg) 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+    line-height: 1.08;
+  }
+  :global(.section-heading h2) {
+    font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+  }
+  .hero-lead,
+  .topic-card p,
+  .step-list p,
+  .safety-panel p,
+  .faq-list p {
+    color: var(--color-text-muted);
+  }
+  .hero-lead {
+    max-width: 42rem;
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+  .hero-actions,
+  .related-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+  .contact-flow {
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .contact-flow > p,
+  .message-guide figcaption {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .contact-flow ol,
+  .preparation-list,
+  .step-list,
+  .safety-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .contact-flow ol {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--color-border);
+  }
+  .contact-flow li {
+    display: grid;
+    min-height: 7rem;
+    align-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    background: var(--color-primary-soft);
+    overflow-wrap: anywhere;
+  }
+  .contact-flow li span,
+  .step-list > li > span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .editorial-split,
+  .message-grid,
+  .safety-panel,
+  .channel-grid {
+    align-items: start;
+  }
+  .preparation-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+  .preparation-list li,
+  .safety-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .preparation-list :global(svg),
+  .safety-list :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+  .topic-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .topic-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .topic-card h3 {
+    margin-top: 0;
+  }
+  .topic-card p {
+    flex-grow: 1;
+  }
+  .message-guide {
+    margin: 0;
+    padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-elevated);
+  }
+  .message-guide blockquote {
+    margin: 0;
+    font-family: inherit;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+  .message-guide mark {
+    padding-inline: 0.15em;
+    background: var(--color-primary-soft);
+    color: var(--color-text);
+    font-weight: 700;
+  }
+  .step-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .step-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .step-list h3,
+  .step-list p {
+    margin: 0;
+  }
+  .step-list p {
+    margin-top: var(--space-xs);
+  }
+  .safety-panel {
+    padding: clamp(var(--space-lg), 4vw, var(--space-2xl));
+    border-left: 3px solid var(--color-focus);
+    background: var(--color-surface-elevated);
+  }
+  .safety-list {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .safety-panel p {
+    margin: var(--space-xl) 0 0;
+  }
+  .channel-card {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-md);
+  }
+  .channel-card h3 {
+    margin: 0;
+  }
+  .phone {
+    color: var(--color-text);
+    font-size: clamp(1.35rem, 4vw, 2rem);
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .faq-list {
+    border-top: 1px solid var(--color-border);
+  }
+  details {
+    border-bottom: 1px solid var(--color-border);
+  }
+  summary {
+    min-height: 3.5rem;
+    padding: var(--space-md) 2rem var(--space-md) 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  details p {
+    margin: 0;
+    padding: 0 0 var(--space-lg);
+  }
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  .related-links {
+    justify-content: center;
+    margin-top: 0;
+  }
+  .related-links a {
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 30rem) {
+    :global(.contact-hero) {
+      padding-block: 1.5rem;
+    }
+    .hero-grid {
+      gap: var(--space-md);
+    }
+    h1 {
+      margin-block: var(--space-md);
+      font-size: 2rem;
+      line-height: 1.07;
+    }
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    .contact-flow {
+      padding: var(--space-sm);
+    }
+    .contact-flow > p {
+      margin-bottom: var(--space-sm);
+    }
+    .contact-flow ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .contact-flow li {
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+      min-height: 3.25rem;
+      align-content: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-sm);
+    }
+    .preparation-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 42rem) {
+    .topic-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(24rem, 0.9fr);
+    }
+    .editorial-split,
+    .message-grid,
+    .safety-panel,
+    .channel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -12,9 +12,7 @@ const isActive = (href: string) => {
   const path = href.split("#")[0] || "/";
   return pathname === path;
 };
-const whatsappUrl = createWhatsAppUrl(
-  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
-);
+const whatsappUrl = createWhatsAppUrl(siteConfig.contact.messages.project);
 ---
 
 <header class="site-header">

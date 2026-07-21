@@ -8,9 +8,7 @@ import {
 import Container from "./Container.astro";
 
 const year = new Date().getFullYear();
-const whatsappUrl = createWhatsAppUrl(
-  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
-);
+const whatsappUrl = createWhatsAppUrl(siteConfig.contact.messages.generic);
 const displayPhone = formatPhoneForDisplay(siteConfig.phone);
 ---
 
@@ -36,7 +34,7 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
       <div>
         <h2>Nous contacter</h2>
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
-          >WhatsApp</a
+          >{siteConfig.contact.whatsappLabel}</a
         >
         <a href={`tel:${siteConfig.phone}`}>{displayPhone}</a>
       </div>

@@ -20,6 +20,15 @@ export const siteConfig = {
     shortBio:
       "Je construis des solutions numériques à partir de problèmes opérationnels réels.",
   },
+  contact: {
+    primaryChannel: "whatsapp",
+    whatsappLabel: "WhatsApp",
+    responseTimeNote: null,
+    messages: {
+      generic: "Bonjour Invincibo Digital, je souhaite vous contacter.",
+      project: "Bonjour Invincibo Digital, je souhaite discuter de mon projet.",
+    },
+  },
 } as const;
 
 export const mainNavigation = [
@@ -28,7 +37,7 @@ export const mainNavigation = [
   { label: "Réalisations", href: "/realisations/" },
   { label: "Méthode", href: "/methode/" },
   { label: "À propos", href: "/a-propos/" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact/" },
 ] as const;
 
 export function createWhatsAppUrl(message?: string): string {

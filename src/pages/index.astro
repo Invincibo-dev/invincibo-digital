@@ -23,9 +23,7 @@ const projects = (
   )
 ).sort((a, b) => a.data.order - b.data.order);
 
-const whatsappUrl = createWhatsAppUrl(
-  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
-);
+const whatsappUrl = createWhatsAppUrl(siteConfig.contact.messages.project);
 
 const problems = [
   {

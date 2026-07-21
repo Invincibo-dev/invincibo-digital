@@ -1,6 +1,6 @@
 # Feuille de route
 
-Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3E ajoute une page À propos dédiée ; la page Contact et les études de cas détaillées restent à développer.
+Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3F ajoute une page Contact dédiée sans formulaire connecté ; les études de cas détaillées et les pages légales restent à développer.
 
 ## Phase 0 — Fondation
 
@@ -36,7 +36,7 @@ Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajust�
 - [x] Réalisations ;
 - [x] Méthode ;
 - [x] À propos ;
-- [ ] Contact.
+- [x] Contact.
 
 Les pages Politique de confidentialité et Mentions légales devront également être préparées avant la mise en production.
 
