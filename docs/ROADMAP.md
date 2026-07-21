@@ -1,6 +1,6 @@
 # Feuille de route
 
-Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3C ajoute le catalogue public et anonymisé des réalisations ; les autorisations et contenus détaillés restent nécessaires avant toute étude de cas individuelle.
+Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajusté après validation. La phase 3D ajoute une page Méthode dédiée ; les pages À propos et Contact ainsi que les études de cas détaillées restent à développer.
 
 ## Phase 0 — Fondation
 
@@ -34,7 +34,7 @@ Les phases ci-dessous sont séquentielles, mais leur contenu pourra être ajust�
 - [x] Accueil ;
 - [x] Solutions ;
 - [x] Réalisations ;
-- [ ] Méthode ;
+- [x] Méthode ;
 - [ ] À propos ;
 - [ ] Contact.
 

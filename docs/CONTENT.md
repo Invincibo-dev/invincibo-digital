@@ -51,9 +51,9 @@ Chaque étude de cas devra contenir :
 
 Les informations confidentielles, données personnelles et interfaces non autorisées doivent être retirées ou anonymisées.
 
-## Navigation pendant la phase 3C
+## Navigation pendant la phase 3D
 
-La navigation publique mène aux routes `/solutions/` et `/realisations/`. Les autres entrées internes continuent de pointer vers les sections réelles de la page d’accueil. Les routes dédiées remplaceront progressivement ces ancres lorsque leur contenu aura été validé et développé.
+La navigation publique mène aux routes `/solutions/`, `/realisations/` et `/methode/`. Les entrées À propos et Contact continuent de pointer vers les sections réelles de la page d’accueil. Les routes dédiées remplaceront ces ancres lorsque leur contenu aura été validé et développé.
 
 Les quatre projets sont publiés sous une forme anonymisée depuis la collection `projects`. La page d’accueil et le catalogue n’affichent que les entrées publiées dont la visibilité n’est pas `private`. Les titres internes, clients, données et détails non autorisés restent absents du rendu public. Les études de cas détaillées restent en préparation.
 

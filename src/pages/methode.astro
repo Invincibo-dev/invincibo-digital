@@ -1,0 +1,668 @@
+---
+import Badge from "../components/common/Badge.astro";
+import ButtonLink from "../components/common/ButtonLink.astro";
+import Card from "../components/common/Card.astro";
+import Container from "../components/common/Container.astro";
+import Icon from "../components/common/Icon.astro";
+import Section from "../components/common/Section.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import MethodStep from "../components/method/MethodStep.astro";
+import { createWhatsAppUrl, siteConfig } from "../config/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const whatsappUrl = createWhatsAppUrl(
+  `Bonjour ${siteConfig.name}, je souhaite discuter de mon projet.`,
+);
+
+const preparationItems = [
+  "Une description de votre activité",
+  "Vos opérations actuelles",
+  "Les problèmes récurrents",
+  "Les utilisateurs concernés",
+  "Vos priorités",
+  "Les outils déjà utilisés",
+] as const;
+
+const methodSteps = [
+  {
+    title: "Compréhension du besoin",
+    description:
+      "Nous cherchons à comprendre le travail réel avant de parler de solution.",
+    points: [
+      "Activité",
+      "Processus",
+      "Difficultés",
+      "Objectifs",
+      "Contraintes",
+    ],
+  },
+  {
+    title: "Cadrage",
+    description:
+      "Nous distinguons ce qui est essentiel de ce qui peut raisonnablement attendre.",
+    points: [
+      "Périmètre",
+      "Priorités",
+      "Fonctions essentielles",
+      "Éléments reportés",
+    ],
+  },
+  {
+    title: "Conception",
+    description:
+      "Nous organisons la structure, les parcours et les règles avant le développement.",
+    points: ["Structure", "Parcours", "Règles métier", "Validation préalable"],
+  },
+  {
+    title: "Développement progressif",
+    description:
+      "La solution est construite par blocs avec des points de contrôle définis.",
+    points: [
+      "Blocs fonctionnels",
+      "Points de contrôle",
+      "Ajustements raisonnables",
+    ],
+  },
+  {
+    title: "Tests et mise en production",
+    description:
+      "Les usages essentiels sont vérifiés avant de préparer la mise à disposition.",
+    points: [
+      "Vérifications",
+      "Corrections",
+      "Préparation du déploiement",
+      "Documentation utile",
+    ],
+  },
+  {
+    title: "Support et évolution",
+    description:
+      "La suite est organisée selon les besoins et les modalités convenues.",
+    points: ["Suivi", "Corrections", "Maintenance", "Améliorations futures"],
+  },
+] as const;
+
+const validationPoints = [
+  "Besoin compris",
+  "Périmètre accepté",
+  "Règles métier confirmées",
+  "Interfaces relues",
+  "Fonctions testées",
+  "Déploiement préparé",
+  "Prochaines évolutions identifiées",
+] as const;
+
+const projectRisks = [
+  "Des objectifs qui restent flous",
+  "Des changements permanents sans arbitrage",
+  "L’absence de responsable pour valider",
+  "Des données nécessaires non disponibles",
+  "Une validation trop tardive",
+  "Trop de fonctions considérées comme prioritaires",
+  "La confusion entre besoin essentiel et idée secondaire",
+] as const;
+
+const communicationPrinciples = [
+  "Des points réguliers adaptés au projet",
+  "La validation des décisions importantes",
+  "La documentation des changements",
+  "Une communication claire sur les questions ouvertes",
+  "Des démonstrations lorsque le projet le nécessite",
+  "Le suivi des éléments qui bloquent l’avancement",
+] as const;
+
+const afterDelivery = [
+  "Correction d’anomalies",
+  "Maintenance",
+  "Sauvegardes selon l’architecture",
+  "Suivi",
+  "Formation des utilisateurs",
+  "Améliorations",
+  "Nouvelles fonctions",
+] as const;
+
+const faq = [
+  [
+    "Dois-je avoir un cahier des charges ?",
+    "Non. Une description claire de votre activité, de vos opérations et de vos difficultés suffit pour commencer l’échange.",
+  ],
+  [
+    "Peut-on commencer par une petite version ?",
+    "Oui, si une première version limitée permet déjà de traiter le besoin essentiel et d’apprendre avant d’élargir le périmètre.",
+  ],
+  [
+    "Comment les changements sont-ils gérés ?",
+    "Ils sont clarifiés, documentés et évalués selon leur effet sur le périmètre convenu avant d’être intégrés.",
+  ],
+  [
+    "Est-ce que je peux suivre l’avancement ?",
+    "Oui. Les décisions importantes et les points de contrôle sont partagés selon l’organisation retenue pour le projet.",
+  ],
+  [
+    "Que se passe-t-il après la livraison ?",
+    "Le support, la maintenance, la formation et les évolutions possibles dépendent des besoins et de l’accord commercial.",
+  ],
+] as const;
+---
+
+<BaseLayout
+  title="Méthode de travail"
+  description="Découvrez comment Invincibo Digital analyse, cadre, conçoit, développe, teste et accompagne les projets logiciels des entreprises."
+  canonical={`${siteConfig.domain}/methode/`}
+>
+  <Section class="method-hero">
+    <Container>
+      <div class="hero-grid">
+        <div>
+          <Badge variant="primary">Notre méthode</Badge>
+          <h1>Comprendre avant de construire.</h1>
+          <p class="hero-lead">
+            Chaque projet commence par l’analyse du fonctionnement réel de
+            l’entreprise, de ses difficultés et de ses priorités.
+          </p>
+          <div class="hero-actions">
+            <ButtonLink href={whatsappUrl} external size="lg"
+              >Discuter de mon projet<Icon
+                slot="icon"
+                name="external"
+              /></ButtonLink
+            >
+            <ButtonLink href="/realisations/" variant="secondary" size="lg"
+              >Voir nos réalisations<Icon
+                slot="icon"
+                name="arrow-right"
+              /></ButtonLink
+            >
+          </div>
+        </div>
+        <div
+          class="method-flow"
+          aria-label="Aperçu conceptuel du déroulement d’un projet"
+        >
+          <p>Aperçu conceptuel</p>
+          <ol>
+            {
+              [
+                "Besoin",
+                "Cadrage",
+                "Construction",
+                "Validation",
+                "Mise en production",
+              ].map((item, index) => (
+                <li>
+                  <span>0{index + 1}</span>
+                  {item}
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Bien commencer"
+          title="Vous n’avez pas besoin d’arriver avec un cahier des charges parfait."
+          description="Vous pouvez commencer par nous expliquer simplement comment votre entreprise fonctionne aujourd’hui."
+        />
+        <div>
+          <ul class="preparation-list">
+            {
+              preparationItems.map((item) => (
+                <li>
+                  <>
+                    <Icon name="check" size={19} />
+                    <span>{item}</span>
+                  </>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="supporting-note">
+            <strong
+              >Notre rôle est aussi de poser les bonnes questions et de
+              clarifier le besoin.</strong
+            > Vous n’avez pas à choisir une technologie avant cet échange.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="processus">
+    <Container>
+      <SectionHeading
+        eyebrow="Six étapes"
+        title="Un projet avance par décisions claires."
+        description="Chaque étape prépare la suivante, sans promettre de changements illimités ni imposer une solution avant d’avoir compris le besoin."
+      />
+      <div class="method-steps section-content">
+        {
+          methodSteps.map((step, index) => (
+            <MethodStep number={`0${index + 1}`} {...step} />
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="validation-grid">
+        <SectionHeading
+          eyebrow="Points de contrôle"
+          title="Ce que nous validons à chaque étape."
+          description="Un projet ne progresse pas par intuition. Les décisions importantes doivent être suffisamment claires avant d’engager la suite."
+        />
+        <ol class="validation-list">
+          {
+            validationPoints.map((point, index) => (
+              <li>
+                <>
+                  <span>0{index + 1}</span>
+                  <strong>{point}</strong>
+                </>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="risk-grid">
+        <SectionHeading
+          eyebrow="Réduire les risques"
+          title="Un projet logiciel échoue rarement uniquement à cause du code."
+          description="Les difficultés viennent souvent de décisions tardives ou d’un périmètre qui n’est pas suffisamment arbitré."
+        />
+        <div>
+          <ul class="risk-list">
+            {projectRisks.map((risk) => <li>{risk}</li>)}
+          </ul><p class="strong-statement">
+            La clarté du périmètre protège le client autant que le développeur.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <SectionHeading
+        eyebrow="Choisir le bon départ"
+        title="MVP ou système complet : deux périmètres différents."
+        description="Le choix dépend du besoin essentiel, des risques et des opérations à couvrir — jamais d’un prix ou d’un délai générique."
+      />
+      <div class="comparison-grid section-content">
+        <Card
+          ><Badge>Première version utile</Badge><h3>MVP</h3><ul>
+            <li>Fonctions essentielles</li><li>
+              Validation rapide du fonctionnement
+            </li><li>Base organisée pour évoluer</li>
+          </ul></Card
+        >
+        <Card
+          ><Badge>Système plus étendu</Badge><h3>Système complet</h3><ul>
+            <li>Périmètre plus large et intégrations</li><li>
+              Permissions, historique et déploiement plus rigoureux
+            </li><li>Documentation plus développée</li>
+          </ul></Card
+        >
+      </div>
+      <p class="comparison-note">
+        Commencer petit n’est pas toujours un manque d’ambition. C’est souvent
+        une manière de réduire le risque.
+      </p>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Pendant le projet"
+          title="Une communication qui accompagne les décisions."
+          description="Le canal et le rythme sont adaptés au projet. Aucun outil particulier n’est imposé par cette présentation."
+        />
+        <ul class="lined-list">
+          {communicationPrinciples.map((principle) => <li>{principle}</li>)}
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="surface">
+    <Container>
+      <div class="editorial-split">
+        <SectionHeading
+          eyebrow="Après la livraison"
+          title="La mise en production n’est pas nécessairement la fin du projet."
+          description="Les modalités de support et d’évolution dépendent du système, de ses usages et de l’accord commercial."
+        />
+        <ul class="after-list">
+          {
+            afterDelivery.map((item) => (
+              <li>
+                <>
+                  <Icon name="check" size={19} />
+                  <span>{item}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <SectionHeading
+        eyebrow="Questions fréquentes"
+        title="Avant de lancer un projet."
+      />
+      <div class="faq-list section-content">
+        {
+          faq.map(([question, answer]) => (
+            <details>
+              <>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </>
+            </details>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <Section variant="elevated">
+    <Container>
+      <div class="final-cta">
+        <SectionHeading
+          align="center"
+          eyebrow="Premier échange"
+          title="Commençons par comprendre votre fonctionnement actuel."
+          description="Expliquez-nous ce que vous faites aujourd’hui, ce qui ralentit votre activité et ce que vous souhaitez mieux organiser."
+        />
+        <ButtonLink href={whatsappUrl} external size="lg"
+          >Discuter sur WhatsApp<Icon slot="icon" name="external" /></ButtonLink
+        >
+        <div class="related-links">
+          <a href="/solutions/">Découvrir nos solutions</a><a
+            href="/realisations/">Voir nos réalisations</a
+          >
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.method-hero) {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .hero-grid,
+  .editorial-split,
+  .validation-grid,
+  .risk-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  h1 {
+    max-width: 15ch;
+    margin: var(--space-lg) 0;
+    font-size: clamp(2.1rem, 5vw, 3.75rem);
+    line-height: 1.08;
+  }
+  :global(.section-heading h2) {
+    font-size: clamp(1.7rem, 3.5vw, 2.65rem);
+  }
+  .hero-lead,
+  .supporting-note,
+  .risk-list,
+  .comparison-grid li,
+  .comparison-note,
+  .lined-list,
+  .faq-list p {
+    color: var(--color-text-muted);
+  }
+  .hero-lead {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+  .method-flow {
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .method-flow > p {
+    margin: 0 0 var(--space-md);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .method-flow ol,
+  .preparation-list,
+  .validation-list,
+  .risk-list,
+  .comparison-grid ul,
+  .lined-list,
+  .after-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .method-flow ol {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--color-border);
+  }
+  .method-flow li {
+    display: grid;
+    align-content: space-between;
+    min-height: 7rem;
+    gap: var(--space-md);
+    padding: var(--space-sm);
+    background: var(--color-primary-soft);
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+  .method-flow li span,
+  .validation-list li > span {
+    color: var(--color-focus);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .editorial-split,
+  .validation-grid,
+  .risk-grid {
+    align-items: start;
+  }
+  .preparation-list,
+  .after-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+  .preparation-list li,
+  .after-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .preparation-list :global(svg),
+  .after-list :global(svg) {
+    flex: 0 0 auto;
+    margin-top: 0.2rem;
+    color: var(--color-success);
+  }
+  .supporting-note {
+    margin: var(--space-xl) 0 0;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+  .supporting-note strong {
+    color: var(--color-text);
+  }
+  .section-content {
+    margin-top: var(--space-2xl);
+  }
+  .method-steps {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .validation-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .validation-list li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .risk-list {
+    columns: 2 15rem;
+    column-gap: var(--space-xl);
+  }
+  .risk-list li {
+    break-inside: avoid;
+    padding: var(--space-sm) 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .strong-statement {
+    margin: var(--space-xl) 0 0;
+    padding: var(--space-lg);
+    border-left: 3px solid var(--color-focus);
+    background: var(--color-primary-soft);
+    font-weight: 700;
+  }
+  .comparison-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  .comparison-grid h3 {
+    margin: var(--space-lg) 0 var(--space-md);
+  }
+  .comparison-grid li + li {
+    margin-top: var(--space-sm);
+  }
+  .comparison-note {
+    max-width: 52rem;
+    margin: var(--space-xl) 0 0;
+  }
+  .lined-list {
+    border-top: 1px solid var(--color-border);
+  }
+  .lined-list li {
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-list {
+    border-top: 1px solid var(--color-border);
+  }
+  details {
+    border-bottom: 1px solid var(--color-border);
+  }
+  summary {
+    min-height: 3.5rem;
+    padding: var(--space-md) 2rem var(--space-md) 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  details p {
+    margin: 0;
+    padding: 0 0 var(--space-lg);
+  }
+  .final-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  .related-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+  }
+  .related-links a {
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 30rem) {
+    :global(.method-hero) {
+      padding-block: 1.5rem;
+    }
+    .hero-grid {
+      gap: var(--space-lg);
+    }
+    h1 {
+      margin-block: var(--space-md);
+      font-size: 2rem;
+      line-height: 1.06;
+    }
+    .hero-lead {
+      margin-bottom: 0;
+    }
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    .method-flow {
+      padding: var(--space-md);
+    }
+    .method-flow > p {
+      margin-bottom: var(--space-sm);
+    }
+    .method-flow ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .method-flow li {
+      grid-template-columns: 2.5rem 1fr;
+      min-height: auto;
+      gap: var(--space-xs);
+    }
+    .method-flow li:last-child {
+      grid-column: 1 / -1;
+    }
+    .preparation-list,
+    .after-list {
+      grid-template-columns: 1fr;
+    }
+    .risk-list {
+      columns: 1;
+    }
+  }
+  @media (min-width: 48rem) {
+    .comparison-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(24rem, 0.95fr);
+    }
+    .editorial-split,
+    .validation-grid,
+    .risk-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
