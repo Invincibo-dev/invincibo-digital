@@ -39,14 +39,7 @@ export const siteConfig = {
   },
 } as const;
 
-export const publicRoutes = [
-  "/",
-  "/solutions/",
-  "/realisations/",
-  "/methode/",
-  "/a-propos/",
-  "/contact/",
-] as const;
+export const publicRoutes = ["/"] as const;
 
 export const provisionalLegalRoutes = [
   "/politique-confidentialite/",

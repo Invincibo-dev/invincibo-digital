@@ -7,7 +7,6 @@ export const GET: APIRoute = () => {
     : [
         "User-agent: *",
         "Allow: /",
-        "Disallow: /design-system/",
         ...provisionalLegalRoutes.map((route) => `Disallow: ${route}`),
       ];
 

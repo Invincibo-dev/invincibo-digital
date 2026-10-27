@@ -110,19 +110,10 @@ if (existsSync(dist)) {
   const titles = new Map();
   const descriptions = new Map();
   const structuredDataRequired = new Map([
-    ["index.html", ["WebSite", "Organization"]],
-    ["solutions/index.html", ["BreadcrumbList", "Service"]],
-    ["realisations/index.html", ["BreadcrumbList"]],
-    ["methode/index.html", ["BreadcrumbList"]],
-    ["a-propos/index.html", ["BreadcrumbList", "ProfilePage", "Person"]],
-    ["contact/index.html", ["BreadcrumbList"]],
+    ["index.html", ["WebSite", "Person"]],
   ]);
-  const forbiddenPublicNames = [
-    "UnionCaisse",
-    "Zamor",
-    "Blex Academy",
-    "CRM Invincibo GSM",
-  ];
+  // Portfolio personnel : les vrais noms de projets sont publics (décision d’octobre 2026).
+  const forbiddenPublicNames = [];
 
   const validateStructuredValue = (value, path, location) => {
     if (value === null || value === "") {
