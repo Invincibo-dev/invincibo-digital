@@ -18,6 +18,8 @@ technologies:
   - React
   - Node.js, Express, Sequelize
   - MySQL
+coverImage: /projects/zamor-manager.webp
+coverImageAlt: "Tableau de bord de Zamor Manager : ventes du jour, de la semaine, du mois et alertes de stock"
 featured: true
 statusLabel: Version 2 livrée
 confidentialityNote: Les données de la boutique ne sont pas montrées.

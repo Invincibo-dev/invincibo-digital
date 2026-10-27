@@ -82,7 +82,17 @@ const homepageStructuredData = [
 >
   <section class="hero">
     <Container>
-      <p class="hero-role">Développeur web en Haïti</p>
+      <div class="hero-top">
+        <img
+          class="portrait"
+          src={siteConfig.founder.photo}
+          alt={`Portrait de ${siteConfig.founder.name}`}
+          width="480"
+          height="480"
+          fetchpriority="high"
+        />
+        <p class="hero-role">Développeur web en Haïti</p>
+      </div>
       <h1>Laveniel Séjour</h1>
       <div class="hero-bottom">
         <p class="hero-lead">
@@ -175,6 +185,17 @@ const homepageStructuredData = [
             <ul>
               {others.map((project) => (
                 <li>
+                  {project.data.coverImage && (
+                    <img
+                      class="others-image"
+                      src={project.data.coverImage}
+                      alt={project.data.coverImageAlt ?? ""}
+                      width="1366"
+                      height="607"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                   <h4>{getPublicProjectTitle(project.data)}</h4>
                   <p>{project.data.summary}</p>
                   <p class="others-status">{project.data.statusLabel}</p>
@@ -241,8 +262,22 @@ const homepageStructuredData = [
     border-bottom: 1px solid var(--color-border);
   }
 
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .portrait {
+    width: clamp(4.5rem, 10vw, 7.5rem);
+    height: auto;
+    border-radius: 50%;
+    background: var(--color-surface);
+  }
+
   .hero-role {
-    margin-bottom: var(--space-md);
+    margin: 0;
     color: var(--color-text-muted);
     font-weight: 500;
   }
@@ -373,6 +408,14 @@ const homepageStructuredData = [
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .others-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
   }
 
   .others h4 {

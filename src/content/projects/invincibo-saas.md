@@ -18,6 +18,8 @@ technologies:
   - API sur Render
   - Supabase (PostgreSQL)
   - Intégration API DHRU
+coverImage: /projects/invincibo-saas.webp
+coverImageAlt: "Portail client d’un technicien sur Invincibo SaaS : choix d’un service UnlockTool et formulaire de commande (données de démonstration)"
 featured: true
 statusLabel: En pilote avec des techniciens
 ---

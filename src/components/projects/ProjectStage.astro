@@ -23,6 +23,8 @@ const host = url ? new URL(url).host : null;
         <img
           src={image}
           alt={imageAlt ?? `Capture d’écran de ${title}`}
+          width="1366"
+          height="607"
           loading="lazy"
           decoding="async"
         />
@@ -82,14 +84,12 @@ const host = url ? new URL(url).host : null;
 
   img {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top left;
+    height: auto;
   }
 
   .empty {
     display: grid;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1366 / 607;
     place-content: center;
     gap: 0.25rem;
     padding: var(--space-lg);

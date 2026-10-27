@@ -14,6 +14,8 @@ capabilities:
   - Gestion des étudiants
   - Modules et examens
   - Suivi de la progression
+coverImage: /projects/blex-academy.webp
+coverImageAlt: "Page d’accueil du site de Blex Academy"
 featured: false
 statusLabel: Plateforme de formation
 confidentialityNote: Les données des étudiants ne sont pas montrées.

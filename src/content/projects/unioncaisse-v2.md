@@ -19,6 +19,8 @@ technologies:
   - MySQL
   - Authentification JWT
 liveUrl: https://unioncaisse.com
+coverImage: /projects/unioncaisse.webp
+coverImageAlt: "Tableau de bord administrateur d’UnionCaisse, montants et effectifs floutés"
 featured: true
 statusLabel: En production
 confidentialityNote: Les données des clients et les montants ne sont jamais montrés.

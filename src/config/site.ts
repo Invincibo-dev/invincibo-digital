@@ -24,6 +24,7 @@ export const siteConfig = {
   founder: {
     name: "Laveniel Séjour",
     role: "Développeur web et entrepreneur",
+    photo: "/images/laveniel-sejour.webp",
     shortBio:
       "Je construis des solutions numériques à partir de problèmes opérationnels réels.",
   },
