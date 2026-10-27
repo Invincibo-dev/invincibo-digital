@@ -68,6 +68,7 @@ const homepageStructuredData = [
     url: siteConfig.domain,
     description: siteConfig.description,
     telephone: siteConfig.phone,
+    email: siteConfig.email,
     knowsLanguage: ["fr", "ht"],
   },
 ] satisfies StructuredDataNode[];
@@ -241,6 +242,9 @@ const homepageStructuredData = [
         >
         <a class="contact-phone" href={`tel:${siteConfig.phone}`}
           >{displayPhone}</a
+        >
+        <a class="contact-email" href={`mailto:${siteConfig.email}`}
+          >{siteConfig.email}</a
         >
       </div>
     </Container>
@@ -504,9 +508,15 @@ const homepageStructuredData = [
     gap: var(--space-md) var(--space-xl);
   }
 
-  .contact-phone {
+  .contact-phone,
+  .contact-email {
     font-size: 1.25rem;
     font-weight: 700;
+  }
+
+  .contact-email {
+    font-size: clamp(1rem, 4.4vw, 1.25rem);
+    overflow-wrap: break-word;
   }
 
   @media (min-width: 48rem) {
