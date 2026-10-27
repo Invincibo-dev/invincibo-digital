@@ -15,7 +15,7 @@ capabilities:
   - Gestion des tâches
   - Accompagnements
 coverImage: /projects/crm-invincibo-gsm.webp
-coverImageAlt: "Tableau de bord du CRM : leads, clients, conversion et relances"
+coverImageAlt: "Tableau de bord du CRM : leads, clients, conversion, relances et leads par offre (données de démonstration)"
 contribution: Conçu et développé seul.
 featured: false
 statusLabel: Outil interne
