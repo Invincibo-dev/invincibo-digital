@@ -181,6 +181,12 @@ const homepageStructuredData = [
                   </p>
                 )}
 
+                {project.data.contribution && (
+                  <p class="project-contribution">
+                    {project.data.contribution}
+                  </p>
+                )}
+
                 <p class="project-status">
                   <span class="status-dot" aria-hidden="true" />
                   {project.data.statusLabel}
@@ -220,7 +226,11 @@ const homepageStructuredData = [
                   )}
                   <h4>{getPublicProjectTitle(project.data)}</h4>
                   <p>{project.data.summary}</p>
-                  <p class="others-status">{project.data.statusLabel}</p>
+                  <p class="others-status">
+                    {project.data.statusLabel}
+                    {project.data.contribution &&
+                      `. ${project.data.contribution}`}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -415,6 +425,10 @@ const homepageStructuredData = [
     border: 1px solid var(--color-border);
     border-radius: 999px;
     font-size: 0.875rem;
+  }
+
+  .project-contribution {
+    font-weight: 700;
   }
 
   .project-stack {

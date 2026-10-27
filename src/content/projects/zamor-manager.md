@@ -19,7 +19,8 @@ technologies:
   - Node.js, Express, Sequelize
   - MySQL
 coverImage: /projects/zamor-manager.webp
-coverImageAlt: "Tableau de bord de Zamor Manager : ventes du jour, de la semaine, du mois et alertes de stock"
+coverImageAlt: "Tableau de bord de Zamor Manager : ventes, alertes de stock, services Natcash et recharges (données de démonstration)"
+contribution: Conçu et développé seul.
 featured: true
 statusLabel: Version 2 livrée
 confidentialityNote: Les données de la boutique ne sont pas montrées.

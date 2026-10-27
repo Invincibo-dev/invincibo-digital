@@ -16,6 +16,7 @@ capabilities:
   - Suivi de la progression
 coverImage: /projects/blex-academy.webp
 coverImageAlt: "Page d’accueil du site de Blex Academy"
+contribution: Développé à deux.
 featured: false
 statusLabel: Plateforme de formation
 confidentialityNote: Les données des étudiants ne sont pas montrées.

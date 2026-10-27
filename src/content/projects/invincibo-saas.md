@@ -20,6 +20,7 @@ technologies:
   - PostgreSQL
 coverImage: /projects/invincibo-saas.webp
 coverImageAlt: "Portail client d’un technicien sur Invincibo SaaS : choix d’un service UnlockTool et formulaire de commande (données de démonstration)"
+contribution: Conçu et développé seul.
 featured: true
 statusLabel: En pilote avec des techniciens
 ---
