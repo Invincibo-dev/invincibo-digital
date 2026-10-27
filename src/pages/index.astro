@@ -95,15 +95,16 @@ const homepageStructuredData = [
           fetchpriority="high"
         />
         <p class="hero-role">
-          Développeur web en Haïti<br />Logiciels de gestion pour entreprises
+          Développeur web en Haïti<br />Logiciels pour boutiques, ateliers GSM
+          et caisses d’épargne
         </p>
       </div>
       <h1>Laveniel Séjour</h1>
       <div class="hero-bottom">
         <p class="hero-lead">
-          Je construis les logiciels de gestion d’entreprises qui tournaient sur
-          WhatsApp, Excel et des cahiers : une caisse d’épargne, une boutique de
-          téléphones, des techniciens GSM.
+          Je construis les logiciels des commerces haïtiens qui gèrent de
+          l’argent, du stock et des clients, et qui tournaient jusque-là sur
+          WhatsApp, Excel et des cahiers.
         </p>
         <div class="hero-actions">
           <ButtonLink href={whatsappUrl} external
@@ -547,6 +548,7 @@ const homepageStructuredData = [
 
   /* Contact : le seul bloc entièrement jaune. */
   .contact {
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
     background: var(--color-accent);
   }
 
@@ -599,7 +601,9 @@ const homepageStructuredData = [
     }
 
     .hero-bottom {
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: auto auto;
+      justify-content: start;
+      column-gap: var(--space-2xl);
     }
 
     .project {

@@ -2,9 +2,9 @@ export const siteConfig = {
   name: "Laveniel Séjour",
   legalName: null,
   description:
-    "Laveniel Séjour, développeur web en Haïti. Logiciels de gestion, plateformes SaaS et applications métier mis en production pour de vraies entreprises.",
+    "Laveniel Séjour, développeur web en Haïti. Logiciels pour boutiques, ateliers GSM et caisses d’épargne : argent, stock et clients, mis en production pour de vrais commerces.",
   footerDescription:
-    "Développeur web en Haïti. Je conçois et je mets en production des logiciels de gestion pour des entreprises réelles.",
+    "Développeur web en Haïti. Logiciels pour boutiques, ateliers GSM et caisses d’épargne.",
   slogan: "Des logiciels de gestion construits pour le terrain.",
   domain: "https://app.cv-pam.com",
   domainIsProvisional: false,
