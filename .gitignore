@@ -21,3 +21,6 @@ dist/
 Thumbs.db
 *.tmp
 *.swp
+
+# wrangler
+.wrangler
