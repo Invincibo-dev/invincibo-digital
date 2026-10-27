@@ -92,7 +92,9 @@ const homepageStructuredData = [
           height="480"
           fetchpriority="high"
         />
-        <p class="hero-role">Développeur web en Haïti</p>
+        <p class="hero-role">
+          Développeur web en Haïti<br />Logiciels de gestion pour entreprises
+        </p>
       </div>
       <h1>Laveniel Séjour</h1>
       <div class="hero-bottom">
@@ -110,6 +112,25 @@ const homepageStructuredData = [
           >
         </div>
       </div>
+      <p class="hero-proof">
+        {"Projets : "}
+        {
+          featured.map((project, index) => (
+            <>
+              <a href={`#${project.data.slug}`}>
+                {getPublicProjectTitle(project.data)}
+              </a>
+              {index < featured.length - 1 && ", "}
+            </>
+          ))
+        }
+        {". Code sur "}
+        <a
+          href={siteConfig.socialLinks.github}
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >.
+      </p>
     </Container>
   </section>
 
@@ -121,7 +142,7 @@ const homepageStructuredData = [
         featured.map((project) => {
           const title = getPublicProjectTitle(project.data);
           return (
-            <article class="project">
+            <article class="project" id={project.data.slug}>
               <ProjectStage
                 title={title}
                 image={project.data.coverImage}
@@ -246,6 +267,12 @@ const homepageStructuredData = [
         <a class="contact-email" href={`mailto:${siteConfig.email}`}
           >{siteConfig.email}</a
         >
+        <a
+          class="contact-email"
+          href={siteConfig.socialLinks.github}
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >
       </div>
     </Container>
   </section>
@@ -257,12 +284,12 @@ const homepageStructuredData = [
   }
 
   h2 {
-    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
   }
 
   /* Hero : le nom est l'image. */
   .hero {
-    padding-block: clamp(3rem, 9vw, 7rem) clamp(3rem, 7vw, 5rem);
+    padding-block: clamp(2rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -287,8 +314,9 @@ const homepageStructuredData = [
   }
 
   h1 {
-    margin-bottom: clamp(2rem, 5vw, 3.5rem);
-    font-size: clamp(3.25rem, 13vw, 10.5rem);
+    margin-bottom: clamp(1.25rem, 3vw, 2.25rem);
+    /* Limité aussi par la hauteur : le texte et les boutons restent visibles sur un portable. */
+    font-size: clamp(3.25rem, min(13vw, 19vh), 10.5rem);
     font-weight: 800;
     line-height: 0.88;
     letter-spacing: -0.055em;
@@ -307,6 +335,17 @@ const homepageStructuredData = [
     max-width: 34ch;
   }
 
+  .hero-proof {
+    margin: var(--space-xl) 0 0;
+    color: var(--color-text-muted);
+    max-width: none;
+  }
+
+  .hero-proof a {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
@@ -314,6 +353,14 @@ const homepageStructuredData = [
   }
 
   /* Projets */
+  .projects {
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .projects h2 + .project {
+    padding-top: var(--space-xl);
+  }
+
   .project {
     display: grid;
     gap: var(--space-xl);
@@ -543,6 +590,12 @@ const homepageStructuredData = [
       grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
       gap: var(--space-2xl);
       align-items: start;
+    }
+
+    /* La capture suit le texte au défilement au lieu de laisser un vide. */
+    .project :global(.stage) {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-lg));
     }
   }
 </style>

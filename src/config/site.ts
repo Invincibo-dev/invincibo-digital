@@ -16,7 +16,9 @@ export const siteConfig = {
   phone: "+50936896407",
   whatsapp: "50936896407",
   email: "grandepuissancelaveniel@gmail.com",
-  socialLinks: {},
+  socialLinks: {
+    github: "https://github.com/Invincibo-dev",
+  },
   assets: {
     favicon: "/favicon.svg",
     openGraphImage: "/og-image.png",
