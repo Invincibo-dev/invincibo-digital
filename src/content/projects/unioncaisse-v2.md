@@ -18,7 +18,6 @@ technologies:
   - Node.js et Express
   - MySQL
   - Authentification JWT
-liveUrl: https://unioncaisse.com
 coverImage: /projects/unioncaisse.webp
 coverImageAlt: "Tableau de bord administrateur d’UnionCaisse, montants et effectifs floutés"
 contribution: Conçu et développé seul.
