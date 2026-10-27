@@ -1,21 +1,25 @@
 ---
-title: UnionCaisse V2
+title: UnionCaisse
 slug: unioncaisse-v2
-summary: Un système structurant la gestion de caisse, l’épargne et le suivi d’opérations dans un environnement contrôlé.
+summary: "Le système de gestion d’une caisse d’épargne de type tontine : agents sur le terrain, dépôts, retraits et participations de chaque client."
 published: true
-order: 1
+order: 2
 caseStudyReady: false
-category: Gestion financière et opérationnelle
-visibility: anonymized
-publicTitle: Système de gestion de caisse et d’opérations
-clientNameIsPublic: false
-challenge: Organiser des opérations financières et opérationnelles tout en distinguant les responsabilités et en conservant un historique exploitable.
-solution: Une solution de gestion réunissant les opérations de caisse et d’épargne dans des parcours encadrés par des rôles et des contrôles.
+category: Caisse d’épargne
+visibility: public
+clientNameIsPublic: true
+challenge: "Les agents collectent l’argent des clients sur le terrain. Chaque dépôt et chaque retrait doit être tracé, et chaque agent reste responsable de ses propres clients."
+solution: "Un système où l’admin, le manager et les agents ont chacun leurs droits, leur caisse et leurs rapports. Chaque client a sa participation, avec ses dates de début et de fin."
 capabilities:
-  - Rôles et permissions
-  - Historique des opérations
-  - Traçabilité et contrôle
+  - Rôles admin, manager et agents
+  - Chaque agent ne voit que ses clients
+  - Espace client pour suivre son épargne
+technologies:
+  - Node.js et Express
+  - MySQL
+  - Authentification JWT
+liveUrl: https://unioncaisse.com
 featured: true
-statusLabel: Étude de cas détaillée en préparation
-confidentialityNote: Le nom du client et les données financières restent confidentiels.
+statusLabel: En production
+confidentialityNote: Les données des clients et les montants ne sont jamais montrés.
 ---

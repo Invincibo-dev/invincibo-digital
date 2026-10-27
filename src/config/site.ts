@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "Invincibo Digital",
+  name: "Laveniel Séjour",
   legalName: null,
   description:
-    "Solutions logicielles, applications métier et automatisations pour les entreprises.",
+    "Laveniel Séjour, développeur web en Haïti. Logiciels de gestion, plateformes SaaS et applications métier mis en production pour de vraies entreprises.",
   footerDescription:
-    "Nous concevons des systèmes numériques pour mieux organiser, suivre et contrôler les opérations des entreprises.",
-  slogan: "Des logiciels conçus pour faire avancer votre entreprise.",
+    "Développeur web en Haïti. Je conçois et je mets en production des logiciels de gestion pour des entreprises réelles.",
+  slogan: "Des logiciels de gestion construits pour le terrain.",
   domain: "https://invincibodigital.com",
   domainIsProvisional: true,
   environment: "development",
@@ -23,7 +23,7 @@ export const siteConfig = {
   },
   founder: {
     name: "Laveniel Séjour",
-    role: "Entrepreneur et développeur de solutions numériques",
+    role: "Développeur web et entrepreneur",
     shortBio:
       "Je construis des solutions numériques à partir de problèmes opérationnels réels.",
   },
@@ -32,8 +32,8 @@ export const siteConfig = {
     whatsappLabel: "WhatsApp",
     responseTimeNote: null,
     messages: {
-      generic: "Bonjour Invincibo Digital, je souhaite vous contacter.",
-      project: "Bonjour Invincibo Digital, je souhaite discuter de mon projet.",
+      generic: "Bonjour Laveniel, je viens de voir ton portfolio.",
+      project: "Bonjour Laveniel, je voudrais te parler d’un projet.",
     },
   },
 } as const;
@@ -53,12 +53,9 @@ export const provisionalLegalRoutes = [
 ] as const;
 
 export const mainNavigation = [
-  { label: "Accueil", href: "/#accueil" },
-  { label: "Solutions", href: "/solutions/" },
-  { label: "Réalisations", href: "/realisations/" },
-  { label: "Méthode", href: "/methode/" },
-  { label: "À propos", href: "/a-propos/" },
-  { label: "Contact", href: "/contact/" },
+  { label: "Projets", href: "/#projets" },
+  { label: "Façon de travailler", href: "/#travail" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export function createWhatsAppUrl(message?: string): string {

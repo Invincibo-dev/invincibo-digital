@@ -20,6 +20,7 @@ const projects = defineCollection({
     solution: z.string().trim().min(1).optional(),
     capabilities: z.array(z.string()).max(3),
     technologies: z.array(z.string()).optional(),
+    liveUrl: z.url().optional(),
     coverImage: z.string().optional(),
     coverImageAlt: z.string().optional(),
     featured: z.boolean().default(false),

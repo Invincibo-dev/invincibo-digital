@@ -20,7 +20,7 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
         <p>{siteConfig.footerDescription}</p>
       </div>
       <nav aria-label="Navigation du pied de page">
-        <h2>Explorer</h2>
+        <h2>Sur cette page</h2>
         <ul>
           {
             mainNavigation.map((item) => (
@@ -32,7 +32,7 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
         </ul>
       </nav>
       <div>
-        <h2>Nous contacter</h2>
+        <h2>Contact</h2>
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
           >{siteConfig.contact.whatsappLabel}</a
         >
@@ -71,7 +71,7 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
   }
 
   .footer-grid p,
-  .footer-grid a,
+  .footer-grid a:not(.footer-brand),
   .footer-bottom {
     color: var(--color-text-muted);
   }

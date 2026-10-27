@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: dark;
+/* Schibsted Grotesk (SIL OFL 1.1), hébergée localement dans public/fonts. */
+@font-face {
+  font-family: "Schibsted Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/schibsted-grotesk-latin-ext-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
-  --color-bg: #07111f;
-  --color-surface: #0d1b2a;
-  --color-surface-elevated: #13263a;
-  --color-text: #f8fafc;
-  --color-text-muted: #b3b7bf;
-  --color-primary: #176fba;
-  --color-primary-hover: #125a98;
-  --color-primary-soft: #112f4d;
-  --color-accent: #d9a928;
-  --color-border: #26384c;
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
-  --color-focus: #60a5fa;
+@font-face {
+  font-family: "Schibsted Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/fonts/schibsted-grotesk-latin-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Palette « atelier » : papier blanc, encre, jaune Invincibo comme scène. */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f1;
+  --color-surface-elevated: #ffffff;
+  --color-text: #15171c;
+  --color-text-muted: #5b6070;
+  --color-primary: #15171c;
+  --color-primary-hover: #2c3039;
+  --color-primary-soft: #f4f4f1;
+  --color-accent: #ffc21a;
+  --color-accent-deep: #f0ad00;
+  --color-link: #1d4ed8;
+  --color-border: #e3e3de;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+  --color-focus: #1d4ed8;
 
   --font-sans:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+    "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --space-xs: 0.5rem;
@@ -29,17 +59,17 @@
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 3rem;
-  --space-section: clamp(4rem, 9vw, 7rem);
-  --container-max: 75rem;
-  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --space-section: clamp(4rem, 9vw, 7.5rem);
+  --container-max: 76rem;
+  --container-gutter: clamp(1rem, 4vw, 2.5rem);
   --header-height: 4.25rem;
   --anchor-offset: calc(var(--header-height) + var(--space-md));
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
-  --shadow-sm: 0 0.5rem 1.5rem rgb(0 0 0 / 0.16);
-  --shadow-md: 0 1rem 2.5rem rgb(0 0 0 / 0.22);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px rgb(21 23 28 / 0.08);
+  --shadow-md: 0 1.5rem 3rem -1rem rgb(21 23 28 / 0.35);
 }
 
 /* Tailwind 4 consomme les mêmes tokens : aucune seconde palette à maintenir. */
@@ -86,7 +116,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-primary);
+  background: var(--color-accent);
   color: var(--color-text);
 }
 
@@ -96,9 +126,9 @@ body {
 
 :where(h1, h2, h3) {
   color: var(--color-text);
-  font-weight: 680;
-  line-height: 1.14;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -224,7 +254,7 @@ code {
 }
 
 .field-error {
-  color: #fca5a5;
+  color: var(--color-danger);
 }
 
 [aria-invalid="true"] {

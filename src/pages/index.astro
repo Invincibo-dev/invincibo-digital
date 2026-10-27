@@ -1,20 +1,15 @@
 ---
 import { getCollection } from "astro:content";
-import Badge from "../components/common/Badge.astro";
 import ButtonLink from "../components/common/ButtonLink.astro";
-import Card from "../components/common/Card.astro";
 import Container from "../components/common/Container.astro";
-import Icon from "../components/common/Icon.astro";
-import Section from "../components/common/Section.astro";
-import SectionHeading from "../components/common/SectionHeading.astro";
-import FounderSection from "../components/home/FounderSection.astro";
-import HeroPreview from "../components/home/HeroPreview.astro";
-import ProblemCard from "../components/home/ProblemCard.astro";
-import ProcessStep from "../components/home/ProcessStep.astro";
-import SolutionCard from "../components/home/SolutionCard.astro";
-import ProjectPreviewCard from "../components/projects/ProjectPreviewCard.astro";
-import { createWhatsAppUrl, siteConfig } from "../config/site";
+import ProjectStage from "../components/projects/ProjectStage.astro";
+import {
+  createWhatsAppUrl,
+  formatPhoneForDisplay,
+  siteConfig,
+} from "../config/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPublicProjectTitle } from "../utils/projects";
 import type { StructuredDataNode } from "../utils/structured-data";
 
 const projects = (
@@ -24,96 +19,37 @@ const projects = (
   )
 ).sort((a, b) => a.data.order - b.data.order);
 
+const featured = projects.filter((project) => project.data.featured);
+const others = projects.filter((project) => !project.data.featured);
+
 const whatsappUrl = createWhatsAppUrl(siteConfig.contact.messages.project);
+const displayPhone = formatPhoneForDisplay(siteConfig.phone);
 
-const problems = [
+const principles = [
   {
-    title: "Informations dispersées",
-    description:
-      "Les données utiles sont réparties entre plusieurs outils, fichiers et conversations.",
+    title: "Je pars du terrain",
+    text: "Je dirige moi-même Invincibo GSM. Je connais les commandes reçues sur WhatsApp, les comptes tenus dans un cahier et les clients qui paient en gourdes ou en dollars. Je construis pour ces réalités-là.",
   },
   {
-    title: "Tâches répétitives",
-    description:
-      "Des opérations manuelles mobilisent du temps et augmentent le risque d’oubli.",
+    title: "Je livre par petites étapes",
+    text: "Une fonctionnalité à la fois, testée, puis mise en ligne. Vous voyez le logiciel avancer chaque semaine au lieu d’attendre une grande livraison.",
   },
   {
-    title: "Suivi difficile",
-    description:
-      "Ventes, clients ou opérations deviennent plus difficiles à suivre quand le volume augmente.",
-  },
-  {
-    title: "Visibilité limitée",
-    description:
-      "Les informations nécessaires pour décider ne sont pas toujours accessibles au bon moment.",
+    title: "Je reste après la mise en ligne",
+    text: "Je ne disparais pas après la livraison : j’assure l’hébergement, les sauvegardes et les évolutions demandées par les utilisateurs.",
   },
 ] as const;
 
-const solutions = [
-  {
-    title: "Logiciels de gestion",
-    description:
-      "Centralisez les informations et les opérations essentielles dans un outil adapté à votre activité.",
-    benefit: "Un suivi plus clair au quotidien",
-    icon: "business",
-  },
-  {
-    title: "Applications métier",
-    description:
-      "Équipez vos opérations d’une application conçue autour de vos rôles, règles et processus.",
-    benefit: "Un outil aligné sur votre fonctionnement",
-    icon: "code",
-  },
-  {
-    title: "Automatisations",
-    description:
-      "Reliez les étapes répétitives qui peuvent être exécutées de façon fiable sans ressaisie inutile.",
-    benefit: "Moins de tâches manuelles",
-    icon: "automation",
-  },
-  {
-    title: "Modernisation de systèmes",
-    description:
-      "Faites évoluer un outil existant devenu difficile à maintenir ou insuffisant pour vos besoins actuels.",
-    benefit: "Une base plus claire pour avancer",
-    icon: "code",
-  },
-] as const;
-
-const process = [
-  [
-    "Compréhension du besoin",
-    "Nous observons vos opérations, vos difficultés et vos objectifs.",
-  ],
-  [
-    "Cadrage",
-    "Nous clarifions le périmètre, les priorités et les contraintes du projet.",
-  ],
-  [
-    "Conception",
-    "Nous organisons les parcours et les fonctions autour du travail réel.",
-  ],
-  [
-    "Développement",
-    "Nous construisons progressivement la solution définie ensemble.",
-  ],
-  [
-    "Tests et mise en production",
-    "Nous vérifions les usages essentiels avant la mise à disposition.",
-  ],
-  [
-    "Support et évolution",
-    "Nous préparons les ajustements utiles après la livraison.",
-  ],
-] as const;
-
-const reasons = [
-  "Compréhension des réalités des petites entreprises",
-  "Solutions adaptées au fonctionnement de chaque activité",
-  "Communication claire pendant le projet",
-  "Sécurité et traçabilité définies selon les besoins",
-  "Accompagnement après la livraison",
-  "Échanges possibles en français et en créole",
+const stack = [
+  "Node.js",
+  "Express",
+  "React",
+  "Astro",
+  "MySQL",
+  "PostgreSQL / Supabase",
+  "Render",
+  "Cloudflare",
+  "Hostinger",
 ] as const;
 
 const homepageStructuredData = [
@@ -123,323 +59,436 @@ const homepageStructuredData = [
     url: siteConfig.domain,
     name: siteConfig.name,
     inLanguage: siteConfig.locale,
-    publisher: { "@id": `${siteConfig.domain}/#organization` },
   },
   {
-    "@type": "Organization",
-    "@id": `${siteConfig.domain}/#organization`,
-    name: siteConfig.name,
-    alternateName: "Invincibo",
+    "@type": "Person",
+    "@id": `${siteConfig.domain}/#person`,
+    name: siteConfig.founder.name,
+    jobTitle: siteConfig.founder.role,
     url: siteConfig.domain,
     description: siteConfig.description,
-    founder: {
-      "@type": "Person",
-      name: siteConfig.founder.name,
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: siteConfig.phone,
-      contactType: "customer service",
-      availableLanguage: ["fr", "ht"],
-    },
+    telephone: siteConfig.phone,
+    knowsLanguage: ["fr", "ht"],
   },
 ] satisfies StructuredDataNode[];
 ---
 
 <BaseLayout
   home
-  title={siteConfig.name}
-  description="Invincibo Digital transforme les opérations dispersées et manuelles en systèmes numériques clairs, fiables et contrôlables."
+  title={`${siteConfig.name} — Développeur web en Haïti`}
+  description={siteConfig.description}
   canonical={siteConfig.domain}
   structuredData={homepageStructuredData}
 >
-  <Section id="accueil" class="hero">
+  <section class="hero">
     <Container>
-      <div class="hero-grid">
-        <div class="hero-content">
-          <Badge variant="primary">Solutions logicielles sur mesure</Badge>
-          <h1>
-            Transformez vos opérations manuelles en un système clair et
-            contrôlable.
-          </h1>
-          <p class="hero-lead">
-            Invincibo Digital conçoit des logiciels de gestion, des applications
-            métier et des automatisations rapides à utiliser pour les
-            entreprises qui veulent mieux organiser leurs activités, contrôler
-            leurs opérations et se développer.
-          </p>
-          <div class="hero-actions">
-            <ButtonLink href={whatsappUrl} external size="lg">
-              Discuter de mon projet
-              <Icon slot="icon" name="external" />
-            </ButtonLink>
-            <ButtonLink href="/realisations/" variant="secondary" size="lg">
-              Voir nos réalisations
-              <Icon slot="icon" name="arrow-right" />
-            </ButtonLink>
-          </div>
-          <p class="trust-line">
-            <Icon name="check" />
-            <span
-              >Solutions conçues selon les réalités de votre entreprise.</span
-            >
-          </p>
+      <p class="hero-role">Développeur web en Haïti</p>
+      <h1>Laveniel Séjour</h1>
+      <div class="hero-bottom">
+        <p class="hero-lead">
+          Je construis les logiciels de gestion d’entreprises qui tournaient sur
+          WhatsApp, Excel et des cahiers : une caisse d’épargne, une boutique de
+          téléphones, des techniciens GSM.
+        </p>
+        <div class="hero-actions">
+          <ButtonLink href={whatsappUrl} external
+            >Écrire sur WhatsApp</ButtonLink
+          >
+          <ButtonLink href="#projets" variant="secondary"
+            >Voir les projets</ButtonLink
+          >
         </div>
-        <HeroPreview />
       </div>
     </Container>
-  </Section>
+  </section>
 
-  <Section id="problemes" variant="surface">
+  <section id="projets" class="projects" aria-labelledby="projets-titre">
     <Container>
-      <SectionHeading
-        eyebrow="Quand l’activité évolue"
-        title="Votre entreprise grandit, mais vos outils ne suivent plus."
-        description="WhatsApp, Excel, les cahiers et les fichiers peuvent aider au départ. Quand les opérations se multiplient, les limites deviennent plus visibles."
-      />
-      <div class="four-column-grid section-content">
-        {
-          problems.map((problem, index) => (
-            <ProblemCard number={`0${index + 1}`} {...problem} />
-          ))
-        }
-      </div>
-    </Container>
-  </Section>
+      <h2 id="projets-titre">Projets</h2>
 
-  <Section id="solutions">
-    <Container>
-      <SectionHeading
-        eyebrow="Ce que nous construisons"
-        title="Des outils qui remettent vos opérations sous contrôle."
-        description="Chaque solution part de votre fonctionnement réel, pas d’un modèle générique imposé à votre entreprise."
-      />
-      <div class="two-column-grid section-content">
-        {solutions.map((solution) => <SolutionCard {...solution} />)}
-      </div>
-    </Container>
-  </Section>
-
-  <Section id="realisations" variant="surface">
-    <Container>
-      <SectionHeading
-        eyebrow="Réalisations"
-        title="Des solutions construites autour de besoins réels."
-        description="Les études de cas détaillées seront publiées après validation des informations et des éléments pouvant être rendus publics."
-      />
-      <div class="two-column-grid section-content">
-        {
-          projects.map((project) => (
-            <ProjectPreviewCard
-              internalTitle={project.data.title}
-              publicTitle={project.data.publicTitle}
-              visibility={project.data.visibility}
-              category={project.data.category}
-              summary={project.data.summary}
-              capabilities={project.data.capabilities}
-              caseStudyReady={project.data.caseStudyReady}
-            />
-          ))
-        }
-      </div>
-      <div class="projects-action">
-        <ButtonLink href="/realisations/" variant="secondary">
-          Découvrir toutes les réalisations
-          <Icon slot="icon" name="arrow-right" />
-        </ButtonLink>
-      </div>
-    </Container>
-  </Section>
-
-  <Section id="methode">
-    <Container>
-      <div class="split-heading">
-        <SectionHeading
-          eyebrow="Notre méthode"
-          title="Construire autour du fonctionnement réel de l’entreprise."
-          description="Le projet avance par étapes claires, de la compréhension des opérations jusqu’au support de la solution."
-        />
-        <div class="process-grid">
-          {
-            process.map(([title, description], index) => (
-              <ProcessStep
-                number={`0${index + 1}`}
+      {
+        featured.map((project) => {
+          const title = getPublicProjectTitle(project.data);
+          return (
+            <article class="project">
+              <ProjectStage
                 title={title}
-                description={description}
+                image={project.data.coverImage}
+                imageAlt={project.data.coverImageAlt}
+                url={project.data.liveUrl}
               />
-            ))
-          }
-        </div>
-      </div>
-    </Container>
-  </Section>
+              <div class="project-text">
+                <p class="project-category">{project.data.category}</p>
+                <h3>{title}</h3>
+                <p class="project-summary">{project.data.summary}</p>
 
-  <Section id="pourquoi" variant="surface">
-    <Container>
-      <div class="why-grid">
-        <SectionHeading
-          eyebrow="Pourquoi Invincibo Digital"
-          title="Une collaboration claire, centrée sur vos besoins."
-          description="Nous cherchons d’abord à comprendre vos contraintes avant de proposer la manière de les traiter."
-        />
-        <Card class="reasons-card">
-          <ul class="reasons-list">
-            {
-              reasons.map((reason) => (
+                <dl class="project-facts">
+                  {project.data.challenge && (
+                    <div>
+                      <dt>Le problème</dt>
+                      <dd>{project.data.challenge}</dd>
+                    </div>
+                  )}
+                  {project.data.solution && (
+                    <div>
+                      <dt>Ce que j’ai construit</dt>
+                      <dd>{project.data.solution}</dd>
+                    </div>
+                  )}
+                </dl>
+
+                <ul class="project-capabilities">
+                  {project.data.capabilities.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+
+                {project.data.technologies && (
+                  <p class="project-stack">
+                    {project.data.technologies.join(", ")}
+                  </p>
+                )}
+
+                <p class="project-status">
+                  <span class="status-dot" aria-hidden="true" />
+                  {project.data.statusLabel}
+                  {project.data.liveUrl && (
+                    <a
+                      href={project.data.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {new URL(project.data.liveUrl).host}
+                    </a>
+                  )}
+                </p>
+              </div>
+            </article>
+          );
+        })
+      }
+
+      {
+        others.length > 0 && (
+          <div class="others">
+            <h3 class="others-title">Autres projets</h3>
+            <ul>
+              {others.map((project) => (
                 <li>
-                  <Icon name="check" size={19} /> <span>{reason}</span>
+                  <h4>{getPublicProjectTitle(project.data)}</h4>
+                  <p>{project.data.summary}</p>
+                  <p class="others-status">{project.data.statusLabel}</p>
                 </li>
-              ))
-            }
-          </ul>
-        </Card>
-      </div>
+              ))}
+            </ul>
+          </div>
+        )
+      }
     </Container>
-  </Section>
+  </section>
 
-  <FounderSection />
-
-  <Section id="contact" variant="elevated">
+  <section id="travail" class="work" aria-labelledby="travail-titre">
     <Container>
-      <div class="final-cta">
-        <SectionHeading
-          align="center"
-          eyebrow="Parlons de votre projet"
-          title="Votre activité mérite un système construit pour sa réalité."
-          description="Présentez-nous vos opérations, vos difficultés et vos objectifs. Nous vous aiderons à identifier la solution numérique adaptée."
-        />
-        <ButtonLink href={whatsappUrl} external size="lg">
-          Discuter sur WhatsApp
-          <Icon slot="icon" name="external" />
-        </ButtonLink>
+      <h2 id="travail-titre">Façon de travailler</h2>
+      <div class="principles">
+        {
+          principles.map((principle) => (
+            <div>
+              <h3>{principle.title}</h3>
+              <p>{principle.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="stack">
+        <h3>Outils que j’utilise</h3>
+        <ul>{stack.map((item) => <li>{item}</li>)}</ul>
       </div>
     </Container>
-  </Section>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-titre">
+    <Container>
+      <h2 id="contact-titre">Un logiciel à construire&nbsp;? Parlons-en.</h2>
+      <p>
+        Décrivez-moi votre activité et ce qui vous fait perdre du temps. Je
+        réponds en français ou en créole.
+      </p>
+      <div class="contact-actions">
+        <ButtonLink href={whatsappUrl} external size="lg"
+          >Écrire sur WhatsApp</ButtonLink
+        >
+        <a class="contact-phone" href={`tel:${siteConfig.phone}`}
+          >{displayPhone}</a
+        >
+      </div>
+    </Container>
+  </section>
 </BaseLayout>
 
 <style>
-  :global(.hero) {
-    padding-block: clamp(2.5rem, 6vw, 5rem);
+  section {
+    padding-block: var(--space-section);
   }
 
-  .hero-grid,
-  .split-heading,
-  .why-grid {
+  h2 {
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  /* Hero : le nom est l'image. */
+  .hero {
+    padding-block: clamp(3rem, 9vw, 7rem) clamp(3rem, 7vw, 5rem);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero-role {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  h1 {
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(3.25rem, 13vw, 10.5rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+  .hero-bottom {
     display: grid;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-
-  .hero-content h1 {
-    max-width: 15ch;
-    margin: 1.25rem 0;
-    font-size: clamp(2.1rem, 5vw, 3.75rem);
-    line-height: 1.08;
+    gap: var(--space-xl);
+    align-items: end;
   }
 
   .hero-lead {
-    color: var(--color-text-muted);
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    margin: 0;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    line-height: 1.45;
+    max-width: 34ch;
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-top: var(--space-lg);
   }
 
-  .trust-line {
+  /* Projets */
+  .project {
+    display: grid;
+    gap: var(--space-xl);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-text);
+  }
+
+  .project-category {
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .project h3 {
+    margin-bottom: var(--space-md);
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .project-summary {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .project-facts {
+    display: grid;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
+
+  .project-facts dt {
+    font-weight: 700;
+  }
+
+  .project-facts dd {
+    margin: 0.15rem 0 0;
+    color: var(--color-text-muted);
+  }
+
+  .project-capabilities {
     display: flex;
-    align-items: flex-start;
+    flex-wrap: wrap;
     gap: var(--space-xs);
-    margin: var(--space-md) 0 0;
+    margin: 0 0 var(--space-md);
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-capabilities li {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.875rem;
+  }
+
+  .project-stack {
     color: var(--color-text-muted);
     font-size: 0.9rem;
   }
 
-  .trust-line :global(svg) {
-    flex: 0 0 auto;
-    margin-top: 0.2rem;
-    color: var(--color-success);
+  .project-status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin: 0;
+    font-weight: 700;
   }
 
-  .trust-line span {
-    min-width: 0;
+  .status-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--color-accent-deep);
   }
 
-  .section-content {
-    margin-top: var(--space-2xl);
+  .project-status a {
+    color: var(--color-link);
+    font-weight: 500;
   }
 
-  .projects-action {
-    margin-top: var(--space-xl);
+  .others {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-text);
   }
 
-  .two-column-grid,
-  .four-column-grid,
-  .process-grid {
+  .others-title {
+    margin-bottom: var(--space-lg);
+    font-size: 1.25rem;
+  }
+
+  .others ul {
     display: grid;
-    gap: var(--space-md);
-  }
-
-  .process-grid {
     gap: var(--space-xl);
-  }
-
-  .reasons-list {
-    display: grid;
-    gap: var(--space-lg);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .reasons-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm);
+  .others h4 {
+    margin: 0 0 var(--space-xs);
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
   }
 
-  .reasons-list :global(svg) {
-    flex: 0 0 auto;
-    margin-top: 0.25rem;
-    color: var(--color-success);
+  .others p {
+    margin: 0;
+    color: var(--color-text-muted);
   }
 
-  .final-cta {
+  .others .others-status {
+    margin-top: var(--space-xs);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  /* Façon de travailler */
+  .work {
+    background: var(--color-surface);
+  }
+
+  .principles {
     display: grid;
-    justify-items: center;
     gap: var(--space-xl);
-    text-align: center;
   }
 
-  @media (max-width: 30rem) {
-    .hero-actions {
-      align-items: stretch;
-      flex-direction: column;
+  .principles h3 {
+    margin-bottom: var(--space-sm);
+    font-size: 1.375rem;
+  }
+
+  .principles p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .stack {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .stack h3 {
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+  }
+
+  .stack ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  /* Contact : le seul bloc entièrement jaune. */
+  .contact {
+    background: var(--color-accent);
+  }
+
+  .contact h2 {
+    margin-bottom: var(--space-lg);
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    max-width: 16ch;
+  }
+
+  .contact p {
+    margin-bottom: var(--space-xl);
+    font-size: 1.125rem;
+    max-width: 46ch;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md) var(--space-xl);
+  }
+
+  .contact-phone {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 48rem) {
+    .principles {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-2xl);
     }
-  }
 
-  @media (min-width: 42rem) {
-    .two-column-grid,
-    .four-column-grid {
+    .others ul {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 64rem) {
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.05fr) minmax(26rem, 0.95fr);
+    .project :global(.stage) {
+      order: 2;
     }
 
-    .four-column-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .hero-bottom {
+      grid-template-columns: minmax(0, 1fr) auto;
     }
 
-    .split-heading,
-    .why-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .project {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-2xl);
       align-items: start;
     }
   }

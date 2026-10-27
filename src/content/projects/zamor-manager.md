@@ -1,21 +1,24 @@
 ---
 title: Zamor Manager
 slug: zamor-manager
-summary: Un outil de gestion commerciale qui rassemble le suivi des ventes, du stock, des réparations et des clients.
+summary: "L’outil de gestion d’une boutique de téléphones : ventes en dollars et en gourdes, stock suivi par IMEI, tickets de réparation et crédits clients."
 published: true
-order: 2
+order: 3
 caseStudyReady: false
-category: Gestion commerciale et opérationnelle
-visibility: anonymized
-publicTitle: Système de gestion commerciale
-clientNameIsPublic: false
-challenge: Suivre plusieurs activités commerciales liées sans disperser les informations entre des outils et registres séparés.
-solution: Un système centralisé pour organiser les ventes, le stock, les réparations et le suivi client au même endroit.
+category: Boutique de téléphones
+visibility: public
+clientNameIsPublic: true
+challenge: "Une boutique qui vend, répare et fait des recharges, avec des clients qui paient en gourdes ou en dollars, parfois à crédit."
+solution: "Un seul outil pour les ventes en deux devises, le stock suivi par IMEI, les tickets de réparation et les crédits clients, avec un tableau de bord des chiffres clés."
 capabilities:
-  - Suivi des ventes
-  - Gestion du stock
-  - Réparations et clients
+  - Ventes en USD et HTG
+  - Stock suivi par IMEI
+  - Tickets de réparation
+technologies:
+  - React
+  - Node.js, Express, Sequelize
+  - MySQL
 featured: true
-statusLabel: Étude de cas détaillée en préparation
-confidentialityNote: L’organisation et ses données opérationnelles ne sont pas identifiées publiquement.
+statusLabel: Version 2 livrée
+confidentialityNote: Les données de la boutique ne sont pas montrées.
 ---
