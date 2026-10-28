@@ -6,7 +6,7 @@ export const siteConfig = {
   footerDescription:
     "Développeur web en Haïti. Logiciels pour boutiques, ateliers GSM et caisses d’épargne.",
   slogan: "Des logiciels de gestion construits pour le terrain.",
-  domain: "https://app.cv-pam.com",
+  domain: "https://lavenielsejour.com",
   domainIsProvisional: false,
   environment: "production",
   locale: "fr-HT",
@@ -15,7 +15,7 @@ export const siteConfig = {
   legalAddress: null,
   phone: "+50936896407",
   whatsapp: "50936896407",
-  email: "grandepuissancelaveniel@gmail.com",
+  email: "contact@lavenielsejour.com",
   socialLinks: {
     github: "https://github.com/Invincibo-dev",
   },
