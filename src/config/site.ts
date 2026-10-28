@@ -18,6 +18,8 @@ export const siteConfig = {
   email: "contact@lavenielsejour.com",
   socialLinks: {
     github: "https://github.com/Invincibo-dev",
+    facebook: "https://www.facebook.com/share/1YYGyEKeay/",
+    youtube: "https://www.youtube.com/@blex.academy",
   },
   assets: {
     favicon: "/favicon.svg",

@@ -72,6 +72,7 @@ const homepageStructuredData = [
     telephone: siteConfig.phone,
     email: siteConfig.email,
     knowsLanguage: ["fr", "ht"],
+    sameAs: Object.values(siteConfig.socialLinks),
   },
 ] satisfies StructuredDataNode[];
 ---
@@ -280,12 +281,22 @@ const homepageStructuredData = [
         <a class="contact-email" href={`mailto:${siteConfig.email}`}
           >{siteConfig.email}</a
         >
-        <a
-          class="contact-email"
-          href={siteConfig.socialLinks.github}
-          target="_blank"
-          rel="noopener noreferrer">GitHub</a
-        >
+        {
+          [
+            ["GitHub", siteConfig.socialLinks.github],
+            ["Facebook", siteConfig.socialLinks.facebook],
+            ["YouTube", siteConfig.socialLinks.youtube],
+          ].map(([label, href]) => (
+            <a
+              class="contact-email"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label}
+            </a>
+          ))
+        }
       </div>
     </Container>
   </section>

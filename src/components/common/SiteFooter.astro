@@ -38,11 +38,17 @@ const displayPhone = formatPhoneForDisplay(siteConfig.phone);
         >
         <a href={`tel:${siteConfig.phone}`}>{displayPhone}</a>
         <a href={`mailto:${siteConfig.email}`}>Email</a>
-        <a
-          href={siteConfig.socialLinks.github}
-          target="_blank"
-          rel="noopener noreferrer">GitHub</a
-        >
+        {
+          [
+            ["GitHub", siteConfig.socialLinks.github],
+            ["Facebook", siteConfig.socialLinks.facebook],
+            ["YouTube", siteConfig.socialLinks.youtube],
+          ].map(([label, href]) => (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {label}
+            </a>
+          ))
+        }
       </div>
       <nav aria-label="Informations légales">
         <h2>Informations</h2>
