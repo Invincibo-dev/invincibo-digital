@@ -18,7 +18,7 @@ export const siteConfig = {
   email: "contact@lavenielsejour.com",
   socialLinks: {
     github: "https://github.com/Invincibo-dev",
-    facebook: "https://www.facebook.com/share/1YYGyEKeay/",
+    facebook: "https://www.facebook.com/laveniel.sejour.2025",
     youtube: "https://www.youtube.com/@blex.academy",
   },
   assets: {
